@@ -15,6 +15,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
@@ -46,8 +47,10 @@ public class inicio_sesion extends AppCompatActivity {
 
         registrar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 Intent intent = new Intent(v.getContext(),Registro.class);
                 startActivity(intent);
+
             }
         });
     }
