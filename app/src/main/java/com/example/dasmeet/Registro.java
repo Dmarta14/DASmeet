@@ -17,6 +17,7 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
+import java.util.Calendar;
 import java.util.regex.Pattern;
 public class Registro extends AppCompatActivity {
 
@@ -53,17 +54,18 @@ public class Registro extends AppCompatActivity {
                     if (contra1.length () < 8) {
                         Toast.makeText(getApplicationContext(), "La contraseña debe tener 8 dígitos como mínimo", Toast.LENGTH_LONG).show();
                     }else {
-                        if (validarpassword (contra1) == false){
-                        Toast.makeText(getApplicationContext(), "La contraseña debe tener números y letras", Toast.LENGTH_LONG).show();
-                        }else{
-                            if (contra1.equals (contraConfirmada)) {
-                                Toast.makeText(getApplicationContext(), "Usuario valido", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(v.getContext(),FormularioGustos.class);
-                                startActivity(intent);
-                            }else {
-                                Toast.makeText(getApplicationContext(), "Contraseñas incorrectas", Toast.LENGTH_LONG).show();
+                            if (validarpassword (contra1) == false){
+                            Toast.makeText(getApplicationContext(), "La contraseña debe tener números y letras", Toast.LENGTH_LONG).show();
+                            }else{
+                                if (contra1.equals (contraConfirmada)) {
+                                    Toast.makeText(getApplicationContext(), "Usuario valido", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(v.getContext(),FormularioGustos.class);
+                                    startActivity(intent);
+                                }else {
+                                    Toast.makeText(getApplicationContext(), "Contraseñas incorrectas", Toast.LENGTH_LONG).show();
+                                }
                             }
-                        }
+
                     }
                 }
 
@@ -96,8 +98,33 @@ public class Registro extends AppCompatActivity {
     public void showDatePickerDialog(View v) {
         DatePickerFragment newFragment = DatePickerFragment.newInstance((datePicker, year, month, day) -> {
             // +1 ya que Enero es 0
-            final String selectedDate = twoDigits(day) + "/" + twoDigits(month + 1) + "/" + year;
-            fechanacimiento.setText(selectedDate);
+            Calendar selectedDate = Calendar.getInstance();
+            selectedDate.set(Calendar.YEAR, year);
+            selectedDate.set(Calendar.MONTH, month);
+            selectedDate.set(Calendar.DAY_OF_MONTH, day);
+
+            // Crear un objeto Calendar con la fecha actual
+            Calendar currentDate = Calendar.getInstance();
+
+            // Calcular la diferencia entre la fecha actual y la fecha seleccionada
+            int age = currentDate.get(Calendar.YEAR) - selectedDate.get(Calendar.YEAR);
+            if (currentDate.get(Calendar.MONTH) < selectedDate.get(Calendar.MONTH)) {
+                age--;
+            } else if (currentDate.get(Calendar.MONTH) == selectedDate.get(Calendar.MONTH)
+                    && currentDate.get(Calendar.DAY_OF_MONTH) < selectedDate.get(Calendar.DAY_OF_MONTH)) {
+                age--;
+            }
+
+            // Comprobar si el usuario es mayor de edad
+            if (age >= 18) {
+                // El usuario es mayor de edad, hacer lo que sea necesario
+                final String diaSeleccionado = twoDigits(day) + "/" + twoDigits(month + 1) + "/" + year;
+                fechanacimiento.setText(diaSeleccionado);
+            } else {
+                Toast.makeText(getApplicationContext(), "El usuario debe ser mayor de edad", Toast.LENGTH_LONG).show();
+            }
+
+
         });
 
         newFragment.show(getSupportFragmentManager(), "datePicker");

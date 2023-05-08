@@ -4,12 +4,14 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.DatePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 public class DatePickerFragment extends DialogFragment {
-    //Clase que usaremos para elegir la fecha de nacimiento a través de un Fragment
 
     private DatePickerDialog.OnDateSetListener listener;
 
@@ -23,7 +25,6 @@ public class DatePickerFragment extends DialogFragment {
         this.listener = listener;
     }
 
-
     @Override
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -32,15 +33,17 @@ public class DatePickerFragment extends DialogFragment {
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        return new DatePickerDialog(getActivity(), AlertDialog.THEME_HOLO_DARK, listener, year, month, day);
+        DatePickerDialog dialog = new DatePickerDialog(getActivity(), AlertDialog.THEME_HOLO_DARK, listener, year, month, day);
+
+        return dialog;
     }
 
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
