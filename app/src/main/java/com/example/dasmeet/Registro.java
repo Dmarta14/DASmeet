@@ -60,6 +60,9 @@ public class Registro extends AppCompatActivity {
                                 if (contra1.equals (contraConfirmada)) {
                                     Toast.makeText(getApplicationContext(), "Usuario valido", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(v.getContext(),FormularioGustos.class);
+                                    intent.putExtra("Usuario",usuario);
+                                    intent.putExtra("Password",contra1);
+                                    intent.putExtra("FechaNacimiento", fechaNa);
                                     startActivity(intent);
                                 }else {
                                     Toast.makeText(getApplicationContext(), "Contraseñas incorrectas", Toast.LENGTH_LONG).show();
