@@ -128,7 +128,7 @@
                     android:id="@+id/Acceder"
                     android:layout_width="138dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="225dp"
+                    android:layout_marginLeft="210dp"
                     android:backgroundTint="#D200BCD4"
                     android:onClick="registrarUsuario"
                     android:text="ACCEDER"
