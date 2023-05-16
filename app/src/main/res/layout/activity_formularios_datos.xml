@@ -234,7 +234,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=" Pregunta nº 4: ¿Cuánto mides?"
+                        android:text=" Pregunta nº 4: ¿Cómo te describirías? (Marque tres opciones)"
                         android:textStyle="bold"
                         android:textColor="#000000"/>
 
@@ -247,41 +247,53 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                        <RadioButton
+                        <CheckBox
                             android:id="@+id/opcion11"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Menos de 150 cm " />
+                            android:text="Gracioso/a" />
 
-                        <RadioButton
+                        <CheckBox
                             android:id="@+id/opcion12"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Entre 150 cm y 159 cm " />
+                            android:text="Alegre" />
 
-                        <RadioButton
+                        <CheckBox
                             android:id="@+id/opcion13"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Entre 160 cm y 169 cm" />
+                            android:text="Simpatico/a" />
 
-                        <RadioButton
+                        <CheckBox
                             android:id="@+id/opcion14"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Entre 170 cm y 179 cm" />
+                            android:text="Borde" />
 
-                        <RadioButton
+                        <CheckBox
                             android:id="@+id/opcion15"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Entre 180 cm y 190 cm" />
+                            android:text="Cabezon/a" />
 
-                        <RadioButton
+                        <CheckBox
                             android:id="@+id/opcion16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Más de 190 cm" />
+                            android:text="Humilde" />
+
+                        <CheckBox
+                            android:id="@+id/opcion17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fiel" />
+
+                        <CheckBox
+                            android:id="@+id/opcion18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Impuntual" />
 
                     </RadioGroup>
 
