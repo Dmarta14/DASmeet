@@ -94,7 +94,7 @@
                         android:id="@+id/textView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Formulario sobre datos personales"
+                        android:text="Formulario de los gustos que tiene que tener la otra persona"
                         android:textAlignment="center"
                         android:textSize="24sp"
                         android:textStyle="bold"
@@ -297,6 +297,54 @@
 
                     </RadioGroup>
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" Pregunta nº 5: ¿Qué hobbies te gustaría que la otra persona practique? (Marque todos cuales quiera)"
+                        android:textStyle="bold"
+                        android:textColor="#000000"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="14dp" />
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_respuestas5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <CheckBox
+                            android:id="@+id/opcion19"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Leer" />
+
+                        <CheckBox
+                            android:id="@+id/opcion20"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hacer deporte" />
+
+                        <CheckBox
+                            android:id="@+id/opcion21"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Salir de fiesta" />
+
+                        <CheckBox
+                            android:id="@+id/opcion22"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ir al cine" />
+
+
+                        <CheckBox
+                            android:id="@+id/opcion23"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Otro" />
+
+                    </RadioGroup>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="14dp" />

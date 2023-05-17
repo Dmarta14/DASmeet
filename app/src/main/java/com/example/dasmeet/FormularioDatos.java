@@ -38,35 +38,39 @@ public class FormularioDatos  extends AppCompatActivity {
 
                 if(selectSexo != -1){
                     RadioButton sexoSelecionado= findViewById(selectSexo);
-                    String respuestaSelecionada = sexoSelecionado.getText().toString();
-                }
+                    String respuestaSelecionadaSexo = sexoSelecionado.getText().toString();
 
+                    ojos = findViewById(R.id.radio_group_respuestas2);
+                    selectOjos = ojos.getCheckedRadioButtonId();
+                    if(selectOjos != -1){
+                        RadioButton ojosSelecionado= findViewById(selectOjos);
+                        String respuestaSelecionadaOjo = ojosSelecionado.getText().toString();
+
+                        pelo = findViewById(R.id.radio_group_respuestas2);
+                        selectPelo = pelo.getCheckedRadioButtonId();
+
+                        if(selectPelo != -1){
+                            RadioButton peloSelecionado= findViewById(selectPelo);
+                            String respuestaSelecionadaPelo = peloSelecionado.getText().toString();
+                        }
+
+                        else {
+                            Toast.makeText(getApplicationContext(), "Debes seleccionar un color de pelo en la pregunta 3", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    else {
+                        Toast.makeText(getApplicationContext(), "Debes seleccionar un color de ojos en la pregunta 2", Toast.LENGTH_LONG).show();
+                    }
+                }
                 else {
                     Toast.makeText(getApplicationContext(), "Debes seleccionar un sexo en la pregunta 1", Toast.LENGTH_LONG).show();
                 }
-                ojos = findViewById(R.id.radio_group_respuestas2);
-                selectOjos = ojos.getCheckedRadioButtonId();
 
-                if(selectOjos != -1){
-                    RadioButton ojosSelecionado= findViewById(selectOjos);
-                    String respuestaSelecionada = ojosSelecionado.getText().toString();
-                }
 
-                else {
-                    Toast.makeText(getApplicationContext(), "Debes seleccionar un color de ojos en la pregunta 2", Toast.LENGTH_LONG).show();
-                }
 
-                pelo = findViewById(R.id.radio_group_respuestas2);
-                selectPelo = pelo.getCheckedRadioButtonId();
 
-                if(selectPelo != -1){
-                    RadioButton peloSelecionado= findViewById(selectPelo);
-                    String respuestaSelecionada = peloSelecionado.getText().toString();
-                }
 
-                else {
-                    Toast.makeText(getApplicationContext(), "Debes seleccionar un color de pelo en la pregunta 3", Toast.LENGTH_LONG).show();
-                }
 
 
 
