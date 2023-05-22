@@ -22,6 +22,9 @@
             android:name=".FormularioDatos"
             android:exported="false" />
         <activity
+            android:name=".FormularioGustos"
+            android:exported="false" />
+        <activity
             android:name=".inicio_sesion"
             android:exported="true">
             <intent-filter>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,8 @@ import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
+
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Calendar;
 import java.util.regex.Pattern;
@@ -68,6 +71,7 @@ public class Registro extends AppCompatActivity {
                             } else {
                                 if (contra1.equals(contraConfirmada)) {
                                     existeUsuarioCorreo(usuario, contra1, fechaNa, correo);
+
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Contraseñas incorrectas", Toast.LENGTH_LONG).show();
                                 }
@@ -144,13 +148,14 @@ public class Registro extends AppCompatActivity {
         return (n <= 9) ? ("0" + n) : String.valueOf(n);
     }
 
-    public void anadirUsuario(String usuario, String password, String fecha, String mail) {
+    public void anadirUsuario(String usuario, String password, String fecha, String mail, String token) {
         Data param = new Data.Builder()
                 .putString("param", "Registrar")
                 .putString("nombre", usuario)
                 .putString("password", password)
                 .putString("fechana", fecha)
-                .putString("mail", mail).build();
+                .putString("mail", mail)
+                .putString("token",token).build();
 
         OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(BD.class).setInputData(param).build();
         WorkManager.getInstance(Registro.this).enqueue(oneTimeWorkRequest);
@@ -194,9 +199,20 @@ public class Registro extends AppCompatActivity {
                             if (b) {
                                 Toast.makeText(getApplicationContext(), "existe un usuario", Toast.LENGTH_LONG).show();
                             } else {
-                                anadirUsuario(usuario, password, fecha, mail);
+                                FirebaseMessaging.getInstance().getToken()
+                                        .addOnCompleteListener(task -> {
+                                            if (!task.isSuccessful()) {
+                                                Log.e("ERR_TOKEN", "onCreate"
+                                                        , task.getException());
+                                                return;
+                                            }
+                                            String token = task.getResult();
+                                            anadirUsuario(usuario, password, fecha, mail, token);
+                                            finish();
+                                        });
+
                                 Toast.makeText(getApplicationContext(), "Usuario valido", Toast.LENGTH_LONG).show();
-                                //anadirUsuario(usuario, contra1, fechaNa, correo);
+
                                 Intent intent = new Intent(this, FormularioDatos.class);
                                 startActivity(intent);
 

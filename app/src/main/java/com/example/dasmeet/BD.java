@@ -44,6 +44,7 @@ public class BD extends Worker{
                 String pass = getInputData().getString("password");
                 String fecha = getInputData().getString("fechana");
                 String mail =  getInputData().getString("mail");
+                String token =  getInputData().getString("token");
                 try {
                     URL dest =new URL(dir);
                     urlConnection = (HttpURLConnection) dest.openConnection();
@@ -56,6 +57,7 @@ public class BD extends Worker{
                     paramJson.put("Password", pass);
                     paramJson.put("FechaNacimiento",fecha);
                     paramJson.put("Mail",mail);
+                    paramJson.put("token",token);
                     PrintWriter out = new PrintWriter(urlConnection.getOutputStream());
                     out.print(paramJson.toString());
                     out.close();
@@ -103,6 +105,47 @@ public class BD extends Worker{
                     urlConnection.setConnectTimeout(5000);
                     urlConnection.setReadTimeout(5000);
                     urlConnection.setRequestMethod("GET");
+                    int statusCode = urlConnection.getResponseCode();
+                    String code =String.valueOf(statusCode);
+                    Log.d("Prueba",code);
+                    if (statusCode == 200) {
+                        BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                        String line;
+                        StringBuilder result = new StringBuilder();
+                        while ((line = bufferedReader.readLine()) != null) {
+                            result.append(line);
+                        }
+                        inputStream.close();
+                        JSONParser parser = new JSONParser();
+                        JSONObject json = (JSONObject) parser.parse(result.toString());
+                        Log.i("JSON", "doWork: " + json);
+
+                        Data.Builder b = new Data.Builder();
+                        return Result.success(b.putBoolean("existe",(boolean) json.get("success")).build());
+                    }
+                } catch (Exception e) {
+                    Log.e("EXCEPTION", "doWork: ", e);
+                    return Result.failure();
+                }
+                break;
+            }
+            case "IntroducirDatos":{
+
+                /*
+                 *  HTTP Request to insert a user into Usuario table
+                 */
+
+                HttpURLConnection urlConnection;
+
+                String mail =  getInputData().getString("mail");
+                String dir = "http://192.168.0.22:3005/introducirDatos";
+                try {
+                    URL dest =new URL(dir);
+                    urlConnection = (HttpURLConnection) dest.openConnection();
+                    urlConnection.setConnectTimeout(5000);
+                    urlConnection.setReadTimeout(5000);
+                    urlConnection.setRequestMethod("POST");
                     int statusCode = urlConnection.getResponseCode();
                     String code =String.valueOf(statusCode);
                     Log.d("Prueba",code);

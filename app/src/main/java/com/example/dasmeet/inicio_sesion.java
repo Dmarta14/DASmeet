@@ -9,6 +9,7 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -22,6 +23,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.Locale;
 
 public class inicio_sesion extends AppCompatActivity {
@@ -102,4 +105,15 @@ public class inicio_sesion extends AppCompatActivity {
                     }
                 });
     }*/
+    public void saveSession(String mail) {
+        try {
+            OutputStreamWriter outputStreamWriter =
+                    new OutputStreamWriter(openFileOutput("config.txt",
+                            Context.MODE_PRIVATE));
+            outputStreamWriter.write(mail);
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e);
+        }
+    }
 }

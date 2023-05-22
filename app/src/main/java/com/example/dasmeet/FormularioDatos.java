@@ -11,6 +11,11 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 
 public class FormularioDatos  extends AppCompatActivity {
 
@@ -53,7 +58,7 @@ public class FormularioDatos  extends AppCompatActivity {
                             RadioButton peloSelecionado= findViewById(selectPelo);
                             String respuestaSelecionadaPelo = peloSelecionado.getText().toString();
 
-
+                            anadirDatos(respuestaSelecionadaSexo,respuestaSelecionadaOjo,respuestaSelecionadaPelo);
                         }
 
                         else {
@@ -78,6 +83,27 @@ public class FormularioDatos  extends AppCompatActivity {
 
                 Intent intent = new Intent(v.getContext(),FormularioGustos.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    public void anadirDatos(String sexo, String ojo ,String pelo){
+        Data param = new Data.Builder()
+                .putString("param", "IntroducirDatos")
+                .putString("sexo", sexo)
+                .putString("ojo", ojo)
+                .putString("pelo", pelo).build();
+
+        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(BD.class).setInputData(param).build();
+        WorkManager.getInstance(FormularioDatos.this).enqueue(oneTimeWorkRequest);
+        WorkManager.getInstance(FormularioDatos.this).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId()).observe(FormularioDatos.this, new Observer<WorkInfo>() {
+            @Override
+            public void onChanged(WorkInfo workInfo) {
+                if (workInfo != null && workInfo.getState().isFinished()) {
+                    if (workInfo.getState() != WorkInfo.State.SUCCEEDED) {
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+                    }
+                }
             }
         });
     }
