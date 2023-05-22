@@ -1,6 +1,7 @@
 package com.example.dasmeet;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import androidx.work.WorkManager;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.Calendar;
 import java.util.regex.Pattern;
 public class Registro extends AppCompatActivity {
@@ -70,6 +73,7 @@ public class Registro extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "La contraseña debe tener números y letras", Toast.LENGTH_LONG).show();
                             } else {
                                 if (contra1.equals(contraConfirmada)) {
+                                    FileUtils fUtils = new FileUtils();
                                     existeUsuarioCorreo(usuario, contra1, fechaNa, correo);
 
                                 } else {
@@ -169,7 +173,11 @@ public class Registro extends AppCompatActivity {
                         Data d = workInfo.getOutputData();
                         boolean b = d.getBoolean("exito", false);
                         if (b) {
+                            saveSession(mail);
+                            Intent intent = new Intent(getApplicationContext(), FormularioDatos.class);
+                            startActivity(intent);
                             Toast.makeText(getApplicationContext(), "Registrado exitosamente", Toast.LENGTH_LONG).show();
+
                         } else {
                             Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
                         }
@@ -208,14 +216,9 @@ public class Registro extends AppCompatActivity {
                                             }
                                             String token = task.getResult();
                                             anadirUsuario(usuario, password, fecha, mail, token);
+                                            Toast.makeText(getApplicationContext(), "Usuario valido", Toast.LENGTH_LONG).show();
                                             finish();
                                         });
-
-                                Toast.makeText(getApplicationContext(), "Usuario valido", Toast.LENGTH_LONG).show();
-
-                                Intent intent = new Intent(this, FormularioDatos.class);
-                                startActivity(intent);
-
                             }
 
                         }
@@ -224,5 +227,16 @@ public class Registro extends AppCompatActivity {
                 });
 
         WorkManager.getInstance(this).enqueue(oneTimeWorkRequest);
+    }
+    private void saveSession(String mail) {
+        try {
+            OutputStreamWriter outputStreamWriter =
+                    new OutputStreamWriter(openFileOutput("config.txt",
+                            Context.MODE_PRIVATE));
+            outputStreamWriter.write(mail);
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e);
+        }
     }
 }

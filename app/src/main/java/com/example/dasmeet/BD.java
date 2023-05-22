@@ -133,22 +133,178 @@ public class BD extends Worker{
             case "IntroducirDatos":{
 
                 /*
-                 *  HTTP Request to insert a user into Usuario table
+                 *  HTTP Request to insert a user into Datos table
                  */
 
                 HttpURLConnection urlConnection;
 
-                String mail =  getInputData().getString("mail");
+
                 String dir = "http://192.168.0.22:3005/introducirDatos";
+                String sexo =  getInputData().getString("sexo");
+                String ojos =  getInputData().getString("ojo");
+                String pelo =  getInputData().getString("pelo");
+                String mail = getInputData().getString("mail");
+
                 try {
                     URL dest =new URL(dir);
                     urlConnection = (HttpURLConnection) dest.openConnection();
                     urlConnection.setConnectTimeout(5000);
                     urlConnection.setReadTimeout(5000);
                     urlConnection.setRequestMethod("POST");
+                    urlConnection.setRequestProperty("Content-Type","application/json");
+                    JSONObject paramJson = new JSONObject();
+                    paramJson.put("Sexo", sexo);
+                    paramJson.put("Ojos", ojos);
+                    paramJson.put("Pelo",pelo);
+                    paramJson.put("cod",mail);
+                    Log.d("Datos Prueba",""+ paramJson);
+                    PrintWriter out = new PrintWriter(urlConnection.getOutputStream());
+                    out.print(paramJson.toString());
+                    out.close();
                     int statusCode = urlConnection.getResponseCode();
                     String code =String.valueOf(statusCode);
-                    Log.d("Prueba",code);
+                    Log.d("Datos Prueba",code);
+                    if (statusCode == 200) {
+                        BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                        String line;
+                        StringBuilder result = new StringBuilder();
+                        while ((line = bufferedReader.readLine()) != null) {
+                            result.append(line);
+                        }
+                        inputStream.close();
+                        JSONParser parser = new JSONParser();
+                        JSONObject json = (JSONObject) parser.parse(result.toString());
+                        Log.i("JSON", "doWork: " + json);
+
+                        Data.Builder b = new Data.Builder();
+                        return Result.success(b.putBoolean("existe",(boolean) json.get("success")).build());
+                    }
+                } catch (Exception e) {
+                    Log.e("EXCEPTION", "doWork: ", e);
+                    return Result.failure();
+                }
+                break;
+            }
+            case "IntroducirPersonalidad":{
+
+                /*
+                 *  HTTP Request to insert a user into Personalidad table
+                 */
+
+                HttpURLConnection urlConnection;
+
+
+                String dir = "http://192.168.0.22:3005/introducirPersonalidad";
+                boolean gracioso =  getInputData().getBoolean("gracioso",false);
+                int intGracioso = gracioso ? 1 : 0;
+                boolean alegre =  getInputData().getBoolean("alegre", false);
+                int intAlegre= alegre ? 1 : 0;
+                boolean simpatico =  getInputData().getBoolean("simpatico", false);
+                int intSimpatico= simpatico ? 1 : 0;
+                boolean borde = getInputData().getBoolean("borde",false);
+                int intBorde = borde ? 1 : 0;
+                boolean cabezon =  getInputData().getBoolean("cabezon",false);
+                int intCabezon = cabezon ? 1 : 0;
+                boolean humilde =  getInputData().getBoolean("humilde", false);
+                int intHumilde = humilde ? 1 : 0;
+                boolean fiel =  getInputData().getBoolean("fiel", false);
+                int intFiel = fiel ? 1 : 0;
+                boolean impuntual = getInputData().getBoolean("impuntual", false);
+                int intImputual = impuntual ? 1 : 0;
+                boolean carinoso =getInputData().getBoolean("carinoso", false);
+                int intCarinoso = carinoso ? 1 : 0;
+                String mail =getInputData().getString("mail");
+                try {
+                    URL dest =new URL(dir);
+                    urlConnection = (HttpURLConnection) dest.openConnection();
+                    urlConnection.setConnectTimeout(5000);
+                    urlConnection.setReadTimeout(5000);
+                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setRequestProperty("Content-Type","application/json");
+                    JSONObject paramJson = new JSONObject();
+                    paramJson.put("gracioso", intGracioso);
+                    paramJson.put("alegre", intAlegre);
+                    paramJson.put("simpatico",intSimpatico);
+                    paramJson.put("borde",intBorde);
+                    paramJson.put("cabezon", intCabezon);
+                    paramJson.put("humilde", intHumilde);
+                    paramJson.put("fiel",intFiel);
+                    paramJson.put("impuntual",intImputual);
+                    paramJson.put("carinoso",intCarinoso);
+                    paramJson.put("cod",mail);
+                    Log.d("Personalidad Prueba",""+ paramJson);
+                    PrintWriter out = new PrintWriter(urlConnection.getOutputStream());
+                    out.print(paramJson.toString());
+                    out.close();
+                    int statusCode = urlConnection.getResponseCode();
+                    String code =String.valueOf(statusCode);
+                    Log.d("Personalidad Prueba",code);
+                    if (statusCode == 200) {
+                        BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                        String line;
+                        StringBuilder result = new StringBuilder();
+                        while ((line = bufferedReader.readLine()) != null) {
+                            result.append(line);
+                        }
+                        inputStream.close();
+                        JSONParser parser = new JSONParser();
+                        JSONObject json = (JSONObject) parser.parse(result.toString());
+                        Log.i("JSON", "doWork: " + json);
+
+                        Data.Builder b = new Data.Builder();
+                        return Result.success(b.putBoolean("existe",(boolean) json.get("success")).build());
+                    }
+                } catch (Exception e) {
+                    Log.e("EXCEPTION", "doWork: ", e);
+                    return Result.failure();
+                }
+                break;
+            }
+
+            case "IntroducirHobbies":{
+
+                /*
+                 *  HTTP Request to insert a user into Hobbies table
+                 */
+
+                HttpURLConnection urlConnection;
+
+
+                String dir = "http://192.168.0.22:3005/introducirHobbies";
+                boolean leer =  getInputData().getBoolean("leer",false);
+                int intLeer = leer ? 1 : 0;
+                boolean deporte =  getInputData().getBoolean("deporte", false);
+                int intDeporte = deporte ? 1 : 0;
+                boolean fiesta =  getInputData().getBoolean("fiesta", false);
+                int intFieste = fiesta ? 1 : 0;
+                boolean cine = getInputData().getBoolean("cine",false);
+                int intCine = cine ? 1 : 0;
+                boolean otro =  getInputData().getBoolean("otro",false);
+                int intOtro = otro ? 1 : 0;
+                String mail =getInputData().getString("mail");
+                try {
+                    URL dest =new URL(dir);
+                    urlConnection = (HttpURLConnection) dest.openConnection();
+                    urlConnection.setConnectTimeout(5000);
+                    urlConnection.setReadTimeout(5000);
+                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setRequestProperty("Content-Type","application/json");
+                    JSONObject paramJson = new JSONObject();
+                    paramJson.put("leer", intLeer);
+                    paramJson.put("deporte", intDeporte);
+                    paramJson.put("fiesta",intFieste);
+                    paramJson.put("cine",intCine);
+                    paramJson.put("otro", intOtro);
+                    paramJson.put("cod",mail);
+                    Log.d("Personalidad Hobbies",""+ paramJson);
+                    PrintWriter out = new PrintWriter(urlConnection.getOutputStream());
+                    out.print(paramJson.toString());
+                    out.close();
+                    int statusCode = urlConnection.getResponseCode();
+                    String code =String.valueOf(statusCode);
+                    Log.d("Hobbies Prueba",code);
                     if (statusCode == 200) {
                         BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
                         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));

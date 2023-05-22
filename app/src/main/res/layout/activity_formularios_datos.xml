@@ -96,9 +96,9 @@
                         android:layout_height="wrap_content"
                         android:text="Formulario sobre datos personales"
                         android:textAlignment="center"
+                        android:textColor="#000000"
                         android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:textColor="#000000"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textView11"
@@ -109,8 +109,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text=" Pregunta nº 1: ¿Cuál es tu sexo?"
-                        android:textStyle="bold"
-                        android:textColor="#000000"/>
+                        android:textColor="#000000"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -149,8 +149,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text=" Pregunta nº 2: ¿Cuál es tu color de ojos?"
-                        android:textStyle="bold"
-                        android:textColor="#000000"/>
+                        android:textColor="#000000"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -189,8 +189,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text=" Pregunta nº 3: ¿Cuál es tu color de pelo?"
-                        android:textStyle="bold"
-                        android:textColor="#000000"/>
+                        android:textColor="#000000"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -234,9 +234,9 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=" Pregunta nº 4: ¿Cómo te describirías? (Marque tres opciones)"
-                        android:textStyle="bold"
-                        android:textColor="#000000"/>
+                        android:text=" Pregunta nº 4: ¿Cómo te describirías? (Marque todos cuales quiera) "
+                        android:textColor="#000000"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -307,8 +307,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text=" Pregunta nº 5: ¿Cuales son tus hobbies? (Marque todos cuales quiera)"
-                        android:textStyle="bold"
-                        android:textColor="#000000"/>
+                        android:textColor="#000000"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -363,6 +363,7 @@
                         app:srcCompat="@drawable/parte2formulario">
 
                     </ImageView>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
