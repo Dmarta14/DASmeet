@@ -118,6 +118,22 @@
                         android:textSize="22sp" />
 
                     <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="14dp" />
+
+                    <EditText
+                        android:id="@+id/Mail"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/texto_form"
+                        android:ems="10"
+                        android:hint="Correo Electrónico"
+                        android:inputType="textEmailAddress"
+                        android:paddingLeft="20sp"
+                        android:textColor="#6E7692"
+                        android:textColorHint="#6E7692"
+                        android:textSize="22sp" />
+                    <TextView
                         android:id="@+id/textView15"
                         android:layout_width="match_parent"
                         android:layout_height="14dp" />

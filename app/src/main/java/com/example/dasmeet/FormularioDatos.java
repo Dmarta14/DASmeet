@@ -52,6 +52,8 @@ public class FormularioDatos  extends AppCompatActivity {
                         if(selectPelo != -1){
                             RadioButton peloSelecionado= findViewById(selectPelo);
                             String respuestaSelecionadaPelo = peloSelecionado.getText().toString();
+
+
                         }
 
                         else {
