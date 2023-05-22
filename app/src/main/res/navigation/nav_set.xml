@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_ajustes"
+    app:startDestination="@id/SettingsFragment">
+    <fragment
+        android:id="@+id/SettingsFragment"
+        android:name="com.example.myapplication.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_SettingsFragment_to_PerfilFragment"
+            app:destination="@id/PerfilFragment" />
+        <action
+            android:id="@+id/action_SettingsFragment_to_NotificacionesFragment"
+            app:destination="@id/NotificacionesFragment" />
+        <action
+            android:id="@+id/action_SettingsFragment_to_IdiomaFragment"
+            app:destination="@id/IdiomaFragment" />
+        <action
+            android:id="@+id/action_SettingsFragment_to_TemaFragment"
+            app:destination="@id/TemaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/PerfilFragment"
+        android:name="com.example.myapplication.PerfilFragment"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" >
+        <action
+            android:id="@+id/action_PerfilFragment_to_SettingsFragment"
+            app:destination="@id/SettingsFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/NotificacionesFragment"
+        android:name="com.example.myapplication.NotificacionesFragment"
+        android:label="fragment_notificaciones"
+        tools:layout="@layout/fragment_notificaciones" >
+        <action
+            android:id="@+id/action_FragmentNotificaciones_to_SettingsFragment"
+            app:destination="@id/SettingsFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/IdiomaFragment"
+        android:name="com.example.myapplication.IdiomaFragment"
+        android:label="fragment_idioma"
+        tools:layout="@layout/fragment_idioma" >
+        <action
+            android:id="@+id/action_IdiomaFragment_to_SettingsFragment"
+            app:destination="@id/SettingsFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/TemaFragment"
+        android:name="com.example.myapplication.TemaFragment"
+        android:label="fragment_tema"
+        tools:layout="@layout/fragment_tema" >
+        <action
+            android:id="@+id/action_TemaFragment_to_SettingsFragment"
+            app:destination="@id/SettingsFragment" />
+
+    </fragment>
+</navigation>
