@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 
 import android.widget.ListView;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -22,57 +24,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SettingsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SettingsFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public SettingsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SettingsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SettingsFragment newInstance(String param1, String param2) {
-        SettingsFragment fragment = new SettingsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,6 +38,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((MainActivity)getActivity()).changeToolbar(false);
         ArrayList<String> texto=new ArrayList<>();
         ArrayList<Drawable> imgs=new ArrayList<>();
         texto.add(getResources().getString(R.string.perfil));
@@ -96,57 +54,59 @@ public class SettingsFragment extends Fragment {
         imgs.add(getResources().getDrawable(R.drawable.eliminar));
 
 
-
-
         ListView lista=view.findViewById(R.id.lista);
         AdaptadorLista adap = new AdaptadorLista(getContext(), texto, imgs);
         lista.setAdapter(adap);
 
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println(texto.get(i));
-                NavController navController = Navigation.findNavController(view);
-                switch (i) {
-                    case 0:
-                        // Navegar al fragmento de ajustes
-                        navController.navigate(R.id.action_SettingsFragment_to_PerfilFragment);
-                        break;
-                    case 1:
-                        // Navegar al fragmento de idioma
-                        navController.navigate(R.id.action_SettingsFragment_to_IdiomaFragment);
-                        break;
-                    case 2:
-                        navController.navigate(R.id.action_SettingsFragment_to_TemaFragment);
+        lista.setOnItemClickListener((adapterView, view1, i, l) -> {
+            System.out.println(texto.get(i));
+            switch (i) {
+                case 0:
+                    // Navegar al fragmento de ajustes
+                    replaceFragment(new PerfilFragment());
+                    break;
+                case 1:
+                    // Navegar al fragmento de idioma
+                    replaceFragment(new IdiomaFragment());
+                    break;
+                case 2:
+                    replaceFragment(new TemaFragment());
+                    break;
+                case 3:
+                    //ir al inicio
+                    break;
+                case 4:
+                    FileUtils fileUtils = new FileUtils();
+                    String mail = fileUtils.readFile(getContext(), "config.txt");
 
-                        break;
-                    case 3:
-                        //ir al inicio
-                        break;
-                    case 4:
-                        FileUtils fileUtils = new FileUtils();
-                        String mail = fileUtils.readFile(getContext(), "config.txt");
+                    String url = "http://" + "192.168.1.116" + ":3005/eliminarUsuario";
+                    JSONObject requestBody = new JSONObject();
+                    try {
 
-                        String url = "http://" + "192.168.1.116" + ":3005/eliminarUsuario";
-                        JSONObject requestBody = new JSONObject();
-                        try {
-
-                            requestBody.put("mail", mail);
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-                        break;
+                        requestBody.put("mail", mail);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
 
 
-                    default:
-                        // Valor de i no válido, realizar una acción alternativa o mostrar un mensaje de error
-                }
-
-
+                default:
+                    // Valor de i no válido, realizar una acción alternativa o mostrar un mensaje de error
             }
+
+
         });
 
 
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+
+        fragmentTransaction.commit();
     }
 
 }

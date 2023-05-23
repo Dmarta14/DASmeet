@@ -1,12 +1,10 @@
 <resources>
     <string name="app_name">DasMeet</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="p1">Person 1</string>
-    <string name="p2">Person 2</string>
-    <string name="person_name">Person Name</string>
-    <string name="person_desc">Lorem ipsum dolor sit amet consectetur adipiscing elit volutpat, nullam dignissim fermentum felis rhoncus ridiculus vel per urna dest it.</string>
-    <string name="start_chat">Start chatting</string>
-    <string name="load_next">Load next couple</string>    <string name="ajustes">Ajustes</string>
+    <string name="p1" translatable="false">Person 1</string>
+    <string name="p2" translatable="false">Person 2</string>
+    <string name="person_name" translatable="false">Person Name</string>
+    <string name="person_desc" translatable="false">Lorem ipsum dolor sit amet consectetur adipiscing elit volutpat, nullam dignissim fermentum felis rhoncus ridiculus vel per urna dest it.</string>
+    <string name="ajustes">Ajustes</string>
     <string name="perfil">Cuenta</string>
     <string name="notificaciones">Notificaciones</string>
     <string name="idioma">Idioma</string>
@@ -61,5 +59,7 @@
     <string name="p3d">Pregunta nº3:¿Cúal es tu color de pelo?  </string>
     <string name="p4d">Pregunta nº4:¿Cómo te describirías?(Marque 3 opciones)  </string>
     <string name="p5d">Pregunta nº5:¿Cúales son tus hobbies?(Marque las que quiera)  </string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string></resources>
+    <string name="start_chat">Empezar a chatear</string>
+    <string name="load_next">Siguiente dúo</string>
+
+</resources>

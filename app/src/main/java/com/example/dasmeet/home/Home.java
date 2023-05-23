@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.dasmeet.MainActivity;
 import com.example.dasmeet.R;
 
 import retrofit2.Call;
@@ -38,6 +39,7 @@ public class Home extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        ((MainActivity)getActivity()).changeToolbar(false);
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         imageView1 = view.findViewById(R.id.imageView1);

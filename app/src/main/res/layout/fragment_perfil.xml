@@ -8,8 +8,8 @@
 
 
     <LinearLayout
-        android:layout_width="247dp"
-        android:layout_height="529dp"
+        android:layout_width="413dp"
+        android:layout_height="732dp"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -111,25 +111,23 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="365dp"
-            android:layout_height="118dp"
+            android:layout_height="305dp"
             android:orientation="horizontal"
             android:padding="16dp">
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="70dp"
-                android:layout_height="30dp"
-                android:src="@drawable/baseline_arrow_back_24" />
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="70dp"
                 android:layout_height="30dp"
-                android:src="@drawable/baseline_save_24" />
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/baseline_save_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
