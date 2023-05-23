@@ -189,6 +189,24 @@
                         android:textColorHint="#6E7692"
                         android:textSize="22sp"
                         tools:ignore="KeyboardInaccessibleWidget" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="14dp" />
+                    <EditText
+                        android:id="@+id/descripcion"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/texto_form"
+                        android:ems="10"
+                        android:inputType="textAutoComplete"
+                        android:hint="Biografía"
+                        android:importantForAutofill="no"
+                        android:maxLines="1"
+                        android:paddingLeft="20sp"
+                        android:textColor="#6E7692"
+                        android:textColorHint="#6E7692"
+                        android:textSize="22sp"
+                        tools:ignore="KeyboardInaccessibleWidget" />
 
                     <TextView
                         android:id="@+id/textView25"

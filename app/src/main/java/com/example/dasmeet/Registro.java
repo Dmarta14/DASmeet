@@ -28,7 +28,7 @@ import java.util.Calendar;
 import java.util.regex.Pattern;
 public class Registro extends AppCompatActivity {
 
-    EditText usu, contraseña1, contraseña2, fechanacimiento, mail;
+    EditText usu, contraseña1, contraseña2, fechanacimiento, mail, descripcion;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -40,6 +40,7 @@ public class Registro extends AppCompatActivity {
         contraseña1 = findViewById(R.id.PasswordInicial);
         contraseña2 = findViewById(R.id.PasswordConfirmada);
         fechanacimiento = findViewById(R.id.et_nacimiento);
+        descripcion = findViewById(R.id.descripcion);
         Button volver = findViewById(R.id.Cancelar);
         volver.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -57,6 +58,7 @@ public class Registro extends AppCompatActivity {
                 String contraConfirmada = contraseña2.getText().toString();
                 String fechaNa = fechanacimiento.getText().toString();
                 String correo = mail.getText().toString();
+                String des = descripcion.getText().toString();
 
                 //validaciones de los campos
                 if (usuario.isEmpty() || contra1.isEmpty() || contraConfirmada.isEmpty() || fechaNa.isEmpty() || correo.isEmpty()) {
@@ -74,7 +76,7 @@ public class Registro extends AppCompatActivity {
                             } else {
                                 if (contra1.equals(contraConfirmada)) {
                                     FileUtils fUtils = new FileUtils();
-                                    existeUsuarioCorreo(usuario, contra1, fechaNa, correo);
+                                    existeUsuarioCorreo(usuario, contra1, fechaNa, correo,des);
 
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Contraseñas incorrectas", Toast.LENGTH_LONG).show();
@@ -152,14 +154,15 @@ public class Registro extends AppCompatActivity {
         return (n <= 9) ? ("0" + n) : String.valueOf(n);
     }
 
-    public void anadirUsuario(String usuario, String password, String fecha, String mail, String token) {
+    public void anadirUsuario(String usuario, String password, String fecha, String mail, String token,String descripcion) {
         Data param = new Data.Builder()
                 .putString("param", "Registrar")
                 .putString("nombre", usuario)
                 .putString("password", password)
                 .putString("fechana", fecha)
                 .putString("mail", mail)
-                .putString("token",token).build();
+                .putString("token",token)
+                .putString("descripcion",descripcion).build();
 
         OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(BD.class).setInputData(param).build();
         WorkManager.getInstance(Registro.this).enqueue(oneTimeWorkRequest);
@@ -187,7 +190,7 @@ public class Registro extends AppCompatActivity {
         });
     }
 
-    public void existeUsuarioCorreo(String usuario, String password, String fecha, String mail) {
+    public void existeUsuarioCorreo(String usuario, String password, String fecha, String mail, String descripcion) {
         Data param = new Data.Builder()
                 .putString("param", "ExisteUsuarioCorreo")
                 .putString("nombre", usuario)
@@ -215,7 +218,7 @@ public class Registro extends AppCompatActivity {
                                                 return;
                                             }
                                             String token = task.getResult();
-                                            anadirUsuario(usuario, password, fecha, mail, token);
+                                            anadirUsuario(usuario, password, fecha, mail, token,descripcion);
                                             Toast.makeText(getApplicationContext(), "Usuario valido", Toast.LENGTH_LONG).show();
                                             finish();
                                         });

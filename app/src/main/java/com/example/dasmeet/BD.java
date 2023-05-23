@@ -46,6 +46,7 @@ public class BD extends Worker{
                 String fecha = getInputData().getString("fechana");
                 String mail =  getInputData().getString("mail");
                 String token =  getInputData().getString("token");
+                String descripcion =  getInputData().getString("descripcion");
                 try {
                     URL dest =new URL(dir);
                     urlConnection = (HttpURLConnection) dest.openConnection();
@@ -59,6 +60,7 @@ public class BD extends Worker{
                     paramJson.put("FechaNacimiento",fecha);
                     paramJson.put("Mail",mail);
                     paramJson.put("token",token);
+                    paramJson.put("descripcion",descripcion);
                     PrintWriter out = new PrintWriter(urlConnection.getOutputStream());
                     out.print(paramJson.toString());
                     out.close();
