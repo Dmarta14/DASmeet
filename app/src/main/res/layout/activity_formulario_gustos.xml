@@ -294,6 +294,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Impuntual" />
+                        <CheckBox
+                            android:id="@+id/opcion19"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cariñoso" />
+
 
                     </RadioGroup>
 
@@ -314,32 +320,32 @@
                         android:layout_height="wrap_content">
 
                         <CheckBox
-                            android:id="@+id/opcion19"
+                            android:id="@+id/opcion20"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Leer" />
 
                         <CheckBox
-                            android:id="@+id/opcion20"
+                            android:id="@+id/opcion21"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Hacer deporte" />
 
                         <CheckBox
-                            android:id="@+id/opcion21"
+                            android:id="@+id/opcion22"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Salir de fiesta" />
 
                         <CheckBox
-                            android:id="@+id/opcion22"
+                            android:id="@+id/opcion23"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ir al cine" />
 
 
                         <CheckBox
-                            android:id="@+id/opcion23"
+                            android:id="@+id/opcion24"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Otro" />
