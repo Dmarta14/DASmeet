@@ -181,7 +181,7 @@ public class GustosFragment extends Fragment {
 
     public void anadirGustosOjo(Boolean marron, Boolean azul, Boolean verde, String mail){
         Data param = new Data.Builder()
-                .putString("param", "SeleccionarGustoOjo")
+                .putString("param", "ModificarGustoOjo")
                 .putBoolean("marron", marron)
                 .putBoolean("azul", azul)
                 .putBoolean("verde", verde)
@@ -201,7 +201,7 @@ public class GustosFragment extends Fragment {
     }
     public void anadirGustosSexo(Boolean hombre, Boolean mujer, Boolean otro, String mail){
         Data param = new Data.Builder()
-                .putString("param", "SeleccionarGustoSexo")
+                .putString("param", "ModificarGustoSexo")
                 .putBoolean("hombre", hombre)
                 .putBoolean("mujer", mujer)
                 .putBoolean("otroSexo", otro)
@@ -221,7 +221,7 @@ public class GustosFragment extends Fragment {
     }
     public void anadirGustosPelo(Boolean rubio, Boolean castano,Boolean moreno, Boolean otro, String mail){
         Data param = new Data.Builder()
-                .putString("param", "SeleccionarGustoPelo")
+                .putString("param", "ModificarGustoPelo")
                 .putBoolean("rubio", rubio)
                 .putBoolean("castano", castano)
                 .putBoolean("moreno",moreno)
@@ -242,7 +242,7 @@ public class GustosFragment extends Fragment {
     }
     public void anardirPersonalidad(Boolean gracioso,Boolean alegre,Boolean simpatico,Boolean borde,Boolean cabezon,Boolean humilde,Boolean fiel,Boolean impuntual,Boolean carinoso,String mail){
         Data param = new Data.Builder()
-                .putString("param", "IntroducirPersonalidadGusto")
+                .putString("param", "ModificarPersonalidadGusto")
                 .putBoolean("gracioso", gracioso)
                 .putBoolean("alegre", alegre)
                 .putBoolean("simpatico", simpatico)
@@ -269,7 +269,7 @@ public class GustosFragment extends Fragment {
 
     public void anadirHobbies(Boolean leer, Boolean deporte, Boolean fiesta, Boolean cine, Boolean otro, String mail){
         Data param = new Data.Builder()
-                .putString("param", "IntroducirHobbiesGusto")
+                .putString("param", "ModificarHobbiesGusto")
                 .putBoolean("leer", leer)
                 .putBoolean("deporte", deporte)
                 .putBoolean("fiesta", fiesta)

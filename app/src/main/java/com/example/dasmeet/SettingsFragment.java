@@ -84,13 +84,12 @@ public class SettingsFragment extends Fragment {
         ArrayList<String> texto=new ArrayList<>();
         ArrayList<Drawable> imgs=new ArrayList<>();
         texto.add(getResources().getString(R.string.perfil));
-        texto.add(getResources().getString(R.string.notificaciones));
+
         texto.add(getResources().getString(R.string.idioma));
         texto.add(getResources().getString(R.string.tema));
         texto.add(getResources().getString(R.string.cerrar));
         texto.add(getResources().getString(R.string.eliminar));
         imgs.add(getResources().getDrawable(R.drawable.perfil));
-        imgs.add(getResources().getDrawable(R.drawable.notifi));
         imgs.add(getResources().getDrawable(R.drawable.idioma));
         imgs.add(getResources().getDrawable(R.drawable.themas));
         imgs.add(getResources().getDrawable(R.drawable.cerrar));
@@ -115,33 +114,29 @@ public class SettingsFragment extends Fragment {
                         break;
                     case 1:
                         // Navegar al fragmento de idioma
-                        navController.navigate(R.id.action_SettingsFragment_to_NotificacionesFragment);
-                        break;
-                    case 2:
-                        // Navegar al fragmento de notificaciones
                         navController.navigate(R.id.action_SettingsFragment_to_IdiomaFragment);
                         break;
-                    case 3:
+                    case 2:
                         navController.navigate(R.id.action_SettingsFragment_to_TemaFragment);
+
                         break;
-                    case 4:
+                    case 3:
                         //ir al inicio
                         break;
-                    case 5:
+                    case 4:
                         FileUtils fileUtils = new FileUtils();
                         String mail = fileUtils.readFile(getContext(), "config.txt");
 
                         String url = "http://" + "192.168.1.116" + ":3005/eliminarUsuario";
                         JSONObject requestBody = new JSONObject();
-
                         try {
 
                             requestBody.put("mail", mail);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
-                        //Ir al inicio
                         break;
+
 
                     default:
                         // Valor de i no válido, realizar una acción alternativa o mostrar un mensaje de error

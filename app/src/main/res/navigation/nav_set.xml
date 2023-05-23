@@ -12,9 +12,7 @@
         <action
             android:id="@+id/action_SettingsFragment_to_PerfilFragment"
             app:destination="@id/PerfilFragment" />
-        <action
-            android:id="@+id/action_SettingsFragment_to_NotificacionesFragment"
-            app:destination="@id/NotificacionesFragment" />
+
         <action
             android:id="@+id/action_SettingsFragment_to_IdiomaFragment"
             app:destination="@id/IdiomaFragment" />
@@ -38,16 +36,7 @@
             app:destination="@id/gustosFragment" />
 
     </fragment>
-    <fragment
-        android:id="@+id/NotificacionesFragment"
-        android:name="com.example.dasmeet.NotificacionesFragment"
-        android:label="fragment_notificaciones"
-        tools:layout="@layout/fragment_notificaciones" >
-        <action
-            android:id="@+id/action_FragmentNotificaciones_to_SettingsFragment"
-            app:destination="@id/SettingsFragment" />
 
-    </fragment>
     <fragment
         android:id="@+id/IdiomaFragment"
         android:name="com.example.dasmeet.IdiomaFragment"

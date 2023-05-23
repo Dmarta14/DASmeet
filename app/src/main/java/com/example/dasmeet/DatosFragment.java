@@ -64,7 +64,7 @@ public class DatosFragment extends Fragment {
         otro=view.findViewById(R.id.opcion24);
 
 
-        Button guardar = view.findViewById(R.id.Guardar);
+        ImageView guardar = view.findViewById(R.id.Guardar);
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,7 +164,7 @@ public class DatosFragment extends Fragment {
     }
     public void anadirDatos(String sexo, String ojo ,String pelo, String mail){
         Data param = new Data.Builder()
-                .putString("param", "IntroducirDatos")
+                .putString("param", "ModificarDatos")
                 .putString("sexo", sexo)
                 .putString("ojo", ojo)
                 .putString("pelo", pelo)
@@ -186,7 +186,7 @@ public class DatosFragment extends Fragment {
     }
     public void anardirPersonalidad(Boolean gracioso,Boolean alegre,Boolean simpatico,Boolean borde,Boolean cabezon,Boolean humilde,Boolean fiel,Boolean impuntual,Boolean carinoso,String mail){
         Data param = new Data.Builder()
-                .putString("param", "IntroducirPersonalidad")
+                .putString("param", "ModificarPersonalidad")
                 .putBoolean("gracioso", gracioso)
                 .putBoolean("alegre", alegre)
                 .putBoolean("simpatico", simpatico)
@@ -213,7 +213,7 @@ public class DatosFragment extends Fragment {
 
     public void anadirHobbies(Boolean leer, Boolean deporte, Boolean fiesta, Boolean cine, Boolean otro, String mail){
         Data param = new Data.Builder()
-                .putString("param", "IntroducirHobbies")
+                .putString("param", "ModificarHobbies")
                 .putBoolean("leer", leer)
                 .putBoolean("deporte", deporte)
                 .putBoolean("fiesta", fiesta)

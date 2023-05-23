@@ -35,6 +35,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -42,75 +43,99 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PerfilFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class PerfilFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private EditText etUsername;
+    private TextView etcorreo,etcontra;
     private ActivityResultLauncher<Intent> imageCaptureLauncher;
     private ActivityResultLauncher<String> requestPermissionLauncher;
 
     private ImageView imageView;
 
 
-    public PerfilFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PerfilFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PerfilFragment newInstance(String param1, String param2) {
-        PerfilFragment fragment = new PerfilFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
 
+        imageCaptureLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Intent data = result.getData();
+                        Bundle extras = data.getExtras();
+                        Bitmap bitmap = (Bitmap) extras.get("data");
+
+                        // Rescale the image
+                        Bitmap rescaledImage = adjustImageSize(bitmap);
+                        imageView.setImageBitmap(rescaledImage);
+
+                        // Set a name to the photo and save it to internal storage
+                        String imageFileName =
+                                "IMG_" + new SimpleDateFormat("yyyyMMdd_HHmmss")
+                                        .format(new Date());
+                        File directory = getContext().getApplicationContext().getFilesDir();
+                        File imageFile = new File(directory, imageFileName);
+
+                        FileOutputStream outputStream = null;
+                        try {
+                            outputStream = new FileOutputStream(imageFile);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                            outputStream.close();
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+
+
+                        // Transform the photo to a Base64 String and compress it
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+                        byte[] byteArray = stream.toByteArray();
+                        String photo64 = Base64.encodeToString(byteArray,Base64.DEFAULT);
+
+
+
+                        // HTTP request to save the photo to database
+                        String url = "http://" + "192.168.1.116" + ":3005/insertarFoto";
+                        JSONObject requestBody = new JSONObject();
+                        FileUtils fileUtils = new FileUtils();
+                        String mail = fileUtils.readFile(getContext(), "config.txt");
+
+
+                        try {
+                            requestBody.put("mail", mail);
+                            requestBody.put("Foto", photo64);
+
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
+                                url, requestBody, response -> {
+                            Log.d("PA", "SUCCESS");
+                        }, error -> {
+                            Log.e("PA", "ERROR", error);
+                        });
+
+                        RequestQueue queue = Volley.newRequestQueue(getContext());
+                        queue.add(request);
+                    }
+                });
 
         return view;
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
 
         ImageButton imageButton = view.findViewById(R.id.imagegustos);
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -130,11 +155,17 @@ public class PerfilFragment extends Fragment {
 
             }
         });
+        FileUtils fileUtils = new FileUtils();
+        String mail = fileUtils.readFile(getContext(), "config.txt");
+
+        etcorreo=view.findViewById(R.id.textView1);
+        etcorreo.setText(mail);
+
         requestPermissionLauncher = registerForActivityResult(
                 new ActivityResultContracts.RequestPermission(),
                 isGranted -> {
                     if (isGranted) {
-                        abrirCamara(view);
+                        takeAPhoto();
                     } else {
 
                         Toast.makeText(getActivity(),
@@ -150,64 +181,16 @@ public class PerfilFragment extends Fragment {
                     PackageManager.PERMISSION_GRANTED) {
                 requestPermissionLauncher.launch(CAMERA);
             } else {
-                abrirCamara(view);
+                takeAPhoto();
             }
         });
-        imageCaptureLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(), result -> {
-                    if (result.getResultCode() == RESULT_OK) {
-                        Intent data = result.getData();
-                        Bundle extras = data.getExtras();
-                        Bitmap bitmap = (Bitmap) extras.get("data");
-
-                        // Rescale the image
-                        Bitmap rescaledImage = adjustImageSize(bitmap);
-                        imageView.setImageBitmap(rescaledImage);
-
-                        // Set a name to the photo and save it to internal storage
-                        String imageFileName =
-                                "IMG_" + new SimpleDateFormat("yyyyMMdd_HHmmss")
-                                        .format(new Date());
-                        MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), bitmap,
-                                imageFileName, null);
-
-                        // Transform the photo to a Base64 String and compress it
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-                        byte[] byteArray = stream.toByteArray();
-                        String photo64 = Base64.encodeToString(byteArray,Base64.DEFAULT);
-
-                        FileUtils fileUtils = new FileUtils();
-                        String mail = fileUtils.readFile(getContext(), "config.txt");
-
-                        // HTTP request to save the photo to database
-                        String url = "http://" + "192.168.1.116" + ":3005/insertarFoto";
-                        JSONObject requestBody = new JSONObject();
-
-                        try {
-                            requestBody.put("mail", mail);
-                            requestBody.put("image", photo64);
-
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-
-                        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
-                                url, requestBody, response -> {
-                            Log.d("PA", "SUCCESS");
-                        }, error -> {
-                            Log.e("PA", "ERROR", error);
-                        });
-
-                        RequestQueue queue = Volley.newRequestQueue(getContext());
-                        queue.add(request);
-                    }
-                });
+        recogerFoto(view);
 
 
     }
 
-    public void abrirCamara(View view){
+    public void recogerFoto(View view){
+
         imageView = view.findViewById(R.id.imageView);
         // Create the registerForActivityResult to get the data after taking the photo
 
@@ -215,7 +198,7 @@ public class PerfilFragment extends Fragment {
         FileUtils fileUtils = new FileUtils();
         String mail = fileUtils.readFile(getContext(), "config.txt");
 
-        String url = "http://" + "192.168.1.116" + ":3005/insertarFoto";
+        String url = "http://" + "192.168.1.116" + ":3005/buscarFoto";
         JSONObject requestBody = new JSONObject();
 
         try {
@@ -228,17 +211,15 @@ public class PerfilFragment extends Fragment {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,
                 requestBody, response -> {
             try {
-                if (!response.get("result").equals("null")) {
+                //Log.e("titosss", "aaaa"+ response.toString());
+                if (response.get("success").equals(true)) {
                     // The photo exists
-                    String image64 = response.getString("result");
+                    String image64 = response.getString("Foto");
                     byte[] b = Base64.decode(image64, Base64.DEFAULT);
                     Bitmap bitmap = BitmapFactory.decodeByteArray(b,0,
                             b.length);
                     Bitmap rescaledImage = adjustImageSize(bitmap);
                     imageView.setImageBitmap(rescaledImage);
-                } else {
-                    // The photo doesn't exist
-                    takeAPhoto();
                 }
             } catch (JSONException e) {
                 throw new RuntimeException(e);
@@ -250,9 +231,6 @@ public class PerfilFragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(getContext());
         queue.add(request);
 
-        imageView.setOnClickListener(c -> {
-            takeAPhoto();
-        });
     }
 
 

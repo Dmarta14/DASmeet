@@ -187,7 +187,7 @@ public class BD extends Worker{
                 }
                 break;
             }
-            case "IntroducirPersonalidad":{
+            case "ModificarPersonalidad":{
 
                 /*
                  *  HTTP Request to insert a user into Personalidad table
@@ -196,7 +196,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.1.116:3005/introducirPersonalidad";
+                String dir = "http://192.168.1.116:3005/ModificarPersonalidad";
                 boolean gracioso =  getInputData().getBoolean("gracioso",false);
                 int intGracioso = gracioso ? 1 : 0;
                 boolean alegre =  getInputData().getBoolean("alegre", false);
@@ -264,7 +264,7 @@ public class BD extends Worker{
                 break;
             }
 
-            case "IntroducirHobbies":{
+            case "ModificarHobbies":{
 
                 /*
                  *  HTTP Request to insert a user into Hobbies table
@@ -273,7 +273,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.1.116:3005/introducirHobbies";
+                String dir = "http://192.168.1.116:3005/ModificarHobbies";
                 boolean leer =  getInputData().getBoolean("leer",false);
                 int intLeer = leer ? 1 : 0;
                 boolean deporte =  getInputData().getBoolean("deporte", false);
@@ -328,7 +328,7 @@ public class BD extends Worker{
                 }
                 break;
             }
-            case "SeleccionarGustoSexo":{
+            case "ModificarGustoSexo":{
 
                 /*
                  *  HTTP Request to insert a user into Sexo table
@@ -337,7 +337,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.1.116:3005/seleccionarGustoSexo";
+                String dir = "http://192.168.1.116:3005/ModificarGustoSexo";
                 boolean hombre =  getInputData().getBoolean("hombre",false);
                 int intHombre = hombre ? 1 : 0;
                 boolean mujer =  getInputData().getBoolean("mujer", false);
@@ -387,7 +387,7 @@ public class BD extends Worker{
                 break;
             }
 
-            case "SeleccionarGustoOjo":{
+            case "ModificarGustoOjo":{
 
                 /*
                  *  HTTP Request to insert a user into Sexo table
@@ -396,7 +396,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.1.116:3005/seleccionarGustoOjo";
+                String dir = "http://192.168.1.116:3005/ModificarGustoOjo";
                 boolean marron =  getInputData().getBoolean("marron",false);
                 int intMarron = marron ? 1 : 0;
                 boolean azul =  getInputData().getBoolean("azul", false);
@@ -445,7 +445,7 @@ public class BD extends Worker{
                 }
                 break;
             }
-            case "SeleccionarGustoPelo":{
+            case "ModificarGustoPelo":{
 
                 /*
                  *  HTTP Request to insert a user into Sexo table
@@ -454,7 +454,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.1.116:3005/seleccionarGustoPelo";
+                String dir = "http://192.168.1.116:3005/ModificarGustoPelo";
                 boolean rubio =  getInputData().getBoolean("rubio",false);
                 int intRubio = rubio ? 1 : 0;
                 boolean castano =  getInputData().getBoolean("castano", false);
@@ -506,7 +506,7 @@ public class BD extends Worker{
                 }
                 break;
             }
-            case "IntroducirHobbiesGusto":{
+            case "ModificarHobbiesGusto":{
 
                 /*
                  *  HTTP Request to insert a user into Hobbies table
@@ -515,7 +515,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.1.116:3005/introducirHobbiesGusto";
+                String dir = "http://192.168.1.116:3005/ModificarHobbiesGusto";
                 boolean leer =  getInputData().getBoolean("leer",false);
                 int intLeer = leer ? 1 : 0;
                 boolean deporte =  getInputData().getBoolean("deporte", false);
@@ -571,7 +571,7 @@ public class BD extends Worker{
                 break;
             }
 
-            case "IntroducirPersonalidadGusto":{
+            case "ModificarPersonalidadGusto":{
 
                 /*
                  *  HTTP Request to insert a user into Personalidad table
@@ -580,7 +580,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.1.116:3005/introducirPersonalidadGusto";
+                String dir = "http://192.168.1.116:3005/ModificarPersonalidadGusto";
                 boolean gracioso =  getInputData().getBoolean("gracioso",false);
                 int intGracioso = gracioso ? 1 : 0;
                 boolean alegre =  getInputData().getBoolean("alegre", false);
