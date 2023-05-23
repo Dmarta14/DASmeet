@@ -50,16 +50,20 @@ public class FormularioGustos extends AppCompatActivity {
         fiesta=findViewById(R.id.opcion22);
         cine=findViewById(R.id.opcion23);
         otro=findViewById(R.id.opcion24);
+        FileUtils fUtils =new FileUtils();
+        String mail = fUtils.readFile(getApplicationContext(), "config.txt");
         Button volver = findViewById(R.id.Cancelar);
         volver.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),Registro.class);
+                eliminarDatosUsuario(mail);
+                eliminarPersonalidadUsuario(mail);
+                eliminarHobbiesUsuario(mail);
+                Intent intent = new Intent(v.getContext(),FormularioDatos.class);
                 startActivity(intent);
             }
         });
 
-        FileUtils fUtils =new FileUtils();
-        String mail = fUtils.readFile(getApplicationContext(), "config.txt");
+
         Button siguiente = findViewById(R.id.Siguiente);
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,6 +161,63 @@ public class FormularioGustos extends AppCompatActivity {
         });
     }
 
+    public void eliminarDatosUsuario(String mail){
+        Data param = new Data.Builder()
+                .putString("param", "EliminarDatosUsuario")
+                .putString("mail",mail).build();
+        Log.d("Prueba Datos", "" + param);
+
+        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(BD.class).setInputData(param).build();
+        WorkManager.getInstance(FormularioGustos.this).enqueue(oneTimeWorkRequest);
+        WorkManager.getInstance(FormularioGustos.this).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId()).observe(FormularioGustos.this, new Observer<WorkInfo>() {
+            @Override
+            public void onChanged(WorkInfo workInfo) {
+                if (workInfo != null && workInfo.getState().isFinished()) {
+                    if (workInfo.getState() != WorkInfo.State.SUCCEEDED) {
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+    }
+    public void eliminarPersonalidadUsuario(String mail){
+        Data param = new Data.Builder()
+                .putString("param", "EliminarPersonalidadUsuario")
+                .putString("mail",mail).build();
+        Log.d("Prueba Datos", "" + param);
+
+        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(BD.class).setInputData(param).build();
+        WorkManager.getInstance(FormularioGustos.this).enqueue(oneTimeWorkRequest);
+        WorkManager.getInstance(FormularioGustos.this).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId()).observe(FormularioGustos.this, new Observer<WorkInfo>() {
+            @Override
+            public void onChanged(WorkInfo workInfo) {
+                if (workInfo != null && workInfo.getState().isFinished()) {
+                    if (workInfo.getState() != WorkInfo.State.SUCCEEDED) {
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+    }
+    public void eliminarHobbiesUsuario(String mail){
+        Data param = new Data.Builder()
+                .putString("param", "EliminarHobbiesUsuario")
+                .putString("mail",mail).build();
+        Log.d("Prueba Datos", "" + param);
+
+        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(BD.class).setInputData(param).build();
+        WorkManager.getInstance(FormularioGustos.this).enqueue(oneTimeWorkRequest);
+        WorkManager.getInstance(FormularioGustos.this).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId()).observe(FormularioGustos.this, new Observer<WorkInfo>() {
+            @Override
+            public void onChanged(WorkInfo workInfo) {
+                if (workInfo != null && workInfo.getState().isFinished()) {
+                    if (workInfo.getState() != WorkInfo.State.SUCCEEDED) {
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+    }
    public void anadirGustosOjo(Boolean marron, Boolean azul, Boolean verde, String mail){
        Data param = new Data.Builder()
                .putString("param", "SeleccionarGustoOjo")

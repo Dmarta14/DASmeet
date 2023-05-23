@@ -43,8 +43,12 @@ public class FormularioDatos  extends AppCompatActivity {
         cine=findViewById(R.id.opcion23);
         otro=findViewById(R.id.opcion24);
         Button volver = findViewById(R.id.Cancelar);
+
+        FileUtils fUtils =new FileUtils();
+        String mail = fUtils.readFile(getApplicationContext(), "config.txt");
         volver.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                eliminarUsuario(mail);
                 Intent intent = new Intent(v.getContext(),Registro.class);
                 startActivity(intent);
             }
@@ -57,8 +61,7 @@ public class FormularioDatos  extends AppCompatActivity {
                 sexo = findViewById(R.id.radio_group_respuestas1);
                 selectSexo = sexo.getCheckedRadioButtonId();
                 Log.d("Prueba", "" + selectSexo);
-                FileUtils fUtils =new FileUtils();
-                String mail = fUtils.readFile(getApplicationContext(), "config.txt");
+
                 if(selectSexo != -1){
                     RadioButton sexoSelecionado= findViewById(selectSexo);
                     String respuestaSelecionadaSexo = sexoSelecionado.getText().toString();
@@ -155,6 +158,26 @@ public class FormularioDatos  extends AppCompatActivity {
         });
     }
 
+    public void eliminarUsuario(String mail){
+        Data param = new Data.Builder()
+                .putString("param", "EliminarUsuario")
+                .putString("mail",mail).build();
+        Log.d("Prueba Datos", "" + param);
+
+        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(BD.class).setInputData(param).build();
+        WorkManager.getInstance(FormularioDatos.this).enqueue(oneTimeWorkRequest);
+        WorkManager.getInstance(FormularioDatos.this).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId()).observe(FormularioDatos.this, new Observer<WorkInfo>() {
+            @Override
+            public void onChanged(WorkInfo workInfo) {
+                if (workInfo != null && workInfo.getState().isFinished()) {
+                    if (workInfo.getState() != WorkInfo.State.SUCCEEDED) {
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+
+    }
     public void anadirDatos(String sexo, String ojo ,String pelo, String mail){
         Data param = new Data.Builder()
                 .putString("param", "IntroducirDatos")

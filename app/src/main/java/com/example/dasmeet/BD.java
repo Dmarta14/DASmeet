@@ -1,6 +1,7 @@
 package com.example.dasmeet;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -664,6 +665,175 @@ public class BD extends Worker{
                     urlConnection.setConnectTimeout(5000);
                     urlConnection.setReadTimeout(5000);
                     urlConnection.setRequestMethod("GET");
+                    int statusCode = urlConnection.getResponseCode();
+                    String code =String.valueOf(statusCode);
+                    Log.d("Prueba",code);
+                    if (statusCode == 200) {
+                        BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                        String line;
+                        StringBuilder result = new StringBuilder();
+                        while ((line = bufferedReader.readLine()) != null) {
+                            result.append(line);
+                        }
+                        inputStream.close();
+                        JSONParser parser = new JSONParser();
+                        JSONObject json = (JSONObject) parser.parse(result.toString());
+                        Log.i("JSON", "doWork: " + json);
+
+                        Data.Builder b = new Data.Builder();
+                        return Result.success(b.putBoolean("existe",(boolean) json.get("success")).build());
+                    }
+                } catch (Exception e) {
+                    Log.e("EXCEPTION", "doWork: ", e);
+                    return Result.failure();
+                }
+                break;
+            }
+            case "EliminarUsuario":{
+
+                /*
+                 *  HTTP Request to delete a user from Usuario table
+                 */
+
+                HttpURLConnection urlConnection;
+                String mail =  getInputData().getString("mail");
+                Log.d("Prueba inicio", "" + mail);
+                String dir = "http://192.168.0.22:3005/eliminarUsuario";
+                try {
+                    Uri.Builder builder = new Uri.Builder().appendQueryParameter("mail", mail);
+                    String params = builder.build().getEncodedQuery();
+
+                    dir += "?" + params;
+                    Log.d("Prueba Eliminar", ""+ dir);
+                    URL dest =new URL(dir);
+                    urlConnection = (HttpURLConnection) dest.openConnection();
+                    urlConnection.setConnectTimeout(5000);
+                    urlConnection.setReadTimeout(5000);
+                    urlConnection.setRequestMethod("DELETE");
+                    int statusCode = urlConnection.getResponseCode();
+                    String code =String.valueOf(statusCode);
+                    Log.d("Prueba",code);
+                    if (statusCode == 200) {
+                        BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                        String line;
+                        StringBuilder result = new StringBuilder();
+                        while ((line = bufferedReader.readLine()) != null) {
+                            result.append(line);
+                        }
+                        inputStream.close();
+                        JSONParser parser = new JSONParser();
+                        JSONObject json = (JSONObject) parser.parse(result.toString());
+                        Log.i("JSON", "doWork: " + json);
+
+                        Data.Builder b = new Data.Builder();
+                        return Result.success(b.putBoolean("existe",(boolean) json.get("success")).build());
+                    }
+                } catch (Exception e) {
+                    Log.e("EXCEPTION", "doWork: ", e);
+                    return Result.failure();
+                }
+                break;
+            }
+            case "EliminarDatosUsuario":{
+
+                /*
+                 *  HTTP Request to delete a user from Usuario table
+                 */
+
+                HttpURLConnection urlConnection;
+                String mail =  getInputData().getString("mail");
+                Log.d("Prueba inicio", "" + mail);
+                String dir = "http://192.168.0.22:3005/eliminarDatosUsuario?mail=" + mail;
+                try {
+                    URL dest =new URL(dir);
+                    urlConnection = (HttpURLConnection) dest.openConnection();
+                    urlConnection.setConnectTimeout(5000);
+                    urlConnection.setReadTimeout(5000);
+                    urlConnection.setRequestMethod("DELETE");
+                    int statusCode = urlConnection.getResponseCode();
+                    String code =String.valueOf(statusCode);
+                    Log.d("Prueba",code);
+                    if (statusCode == 200) {
+                        BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                        String line;
+                        StringBuilder result = new StringBuilder();
+                        while ((line = bufferedReader.readLine()) != null) {
+                            result.append(line);
+                        }
+                        inputStream.close();
+                        JSONParser parser = new JSONParser();
+                        JSONObject json = (JSONObject) parser.parse(result.toString());
+                        Log.i("JSON", "doWork: " + json);
+
+                        Data.Builder b = new Data.Builder();
+                        return Result.success(b.putBoolean("existe",(boolean) json.get("success")).build());
+                    }
+                } catch (Exception e) {
+                    Log.e("EXCEPTION", "doWork: ", e);
+                    return Result.failure();
+                }
+                break;
+            }
+            case "EliminarPersonalidadUsuario":{
+
+                /*
+                 *  HTTP Request to delete a user from Usuario table
+                 */
+
+                HttpURLConnection urlConnection;
+                String mail =  getInputData().getString("mail");
+                Log.d("Prueba inicio", "" + mail);
+                String dir = "http://192.168.0.22:3005/eliminarPersonalidadUsuario?mail=" + mail;
+                try {
+                    URL dest =new URL(dir);
+                    urlConnection = (HttpURLConnection) dest.openConnection();
+                    urlConnection.setConnectTimeout(5000);
+                    urlConnection.setReadTimeout(5000);
+                    urlConnection.setRequestMethod("DELETE");
+                    int statusCode = urlConnection.getResponseCode();
+                    String code =String.valueOf(statusCode);
+                    Log.d("Prueba",code);
+                    if (statusCode == 200) {
+                        BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                        String line;
+                        StringBuilder result = new StringBuilder();
+                        while ((line = bufferedReader.readLine()) != null) {
+                            result.append(line);
+                        }
+                        inputStream.close();
+                        JSONParser parser = new JSONParser();
+                        JSONObject json = (JSONObject) parser.parse(result.toString());
+                        Log.i("JSON", "doWork: " + json);
+
+                        Data.Builder b = new Data.Builder();
+                        return Result.success(b.putBoolean("existe",(boolean) json.get("success")).build());
+                    }
+                } catch (Exception e) {
+                    Log.e("EXCEPTION", "doWork: ", e);
+                    return Result.failure();
+                }
+                break;
+            }
+            case "EliminarHobbiesUsuario":{
+
+                /*
+                 *  HTTP Request to delete a user from Usuario table
+                 */
+
+                HttpURLConnection urlConnection;
+                String mail =  getInputData().getString("mail");
+                Log.d("Prueba inicio", "" + mail);
+                String dir = "http://192.168.0.22:3005/eliminarHobbiesUsuario?mail=" + mail;
+                try {
+                    URL dest =new URL(dir);
+                    urlConnection = (HttpURLConnection) dest.openConnection();
+                    urlConnection.setConnectTimeout(5000);
+                    urlConnection.setReadTimeout(5000);
+                    urlConnection.setRequestMethod("DELETE");
                     int statusCode = urlConnection.getResponseCode();
                     String code =String.valueOf(statusCode);
                     Log.d("Prueba",code);
