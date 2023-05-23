@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DasMeet</string>
+    <string name="app_name">Dasmeet</string>
     <string name="p1" translatable="false">Person 1</string>
     <string name="p2" translatable="false">Person 2</string>
     <string name="person_name" translatable="false">Person Name</string>
@@ -8,36 +8,36 @@
     <string name="perfil">Cuenta</string>
     <string name="notificaciones">Notificaciones</string>
     <string name="idioma">Idioma</string>
-    <string name="tema">VisualizaciÃ³n</string>
+    <string name="tema">Visualización</string>
     <string name="cerrar">Salir</string>
     <string name="eliminar">Borrar cuenta </string>
     <string name="aspecto">Aspecto</string>
     <string name="claro">Claro</string>
     <string name="oscuro">Oscuro</string>
     <string name="esp">Castellano</string>
-    <string name="ing">InglÃ©s</string>
+    <string name="ing">Inglés</string>
     <string name="guardar">Guardar</string>
     <string name="Gustos">Cambia tus gustos</string>
     <string name="datos">Cambia tus datos</string>
-    <string name="contra">contraseÃ±a</string>
+    <string name="contra">contraseña</string>
     <string name="usuario">usuario</string>
-    <string name="camara">CÃ¡mara</string>
-    <string name="galeria">GalerÃ­a</string>
+    <string name="camara">Cámara</string>
+    <string name="galeria">Galería</string>
     <string name="formulario1">Gustos que tiene que tener la otra persona   Puedes marcar varias opciones en cada pregunta</string>
-    <string name="p1g">Pregunta nÂº1:Â¿CÃºal es el sexo que te atrae?  </string>
+    <string name="p1g">Pregunta nº1:¿Cúal es el sexo que te atrae?  </string>
     <string name="h">Hombre</string>
     <string name="m">Mujer</string>
     <string name="o">Otro</string>
-    <string name="p2g">Pregunta nÂº2:Â¿CuÃ¡l es el color de ojos que te gusta?</string>
+    <string name="p2g">Pregunta nº2:¿Cuál es el color de ojos que te gusta?</string>
     <string name="marrones">Marrones</string>
     <string name="azules">Azules</string>
     <string name="verdes">Verdes</string>
-    <string name="p3g">Pregunta nÂº3:Â¿CuÃ¡l es el color de pelo que te atrae?</string>
+    <string name="p3g">Pregunta nº3:¿Cuál es el color de pelo que te atrae?</string>
     <string name="rubio">Rubio</string>
-    <string name="castano">CastaÃ±o</string>
+    <string name="castano">Castaño</string>
     <string name="moreno">Moreno</string>
     <string name="op">Otro(Pelirrojo,azul,Verde,Rosa...)</string>
-    <string name="p4g">Pregunta nÂº4:Â¿CÃ³mo te gusta que sea una persona?</string>
+    <string name="p4g">Pregunta nº4:¿Cómo te gusta que sea una persona?</string>
     <string name="gracioso">Gracioso/a</string>
     <string name="alegre">Alegre</string>
     <string name="simpatic">Simpatico/a</string>
@@ -46,20 +46,20 @@
     <string name="humilde">Humilde</string>
     <string name="fiel">Fiel</string>
     <string name="impuntual">Impuntual</string>
-    <string name="p5g">Pregunta nÂº5:Â¿QuÃ© hobbies te gustarÃ­a que la otra persona practicase?</string>
+    <string name="p5g">Pregunta nº5:¿Qué hobbies te gustaría que la otra persona practicase?</string>
     <string name="leer">Leer</string>
     <string name="deporte">Hacer Deporte</string>
     <string name="fiesta">Salir de fiesta</string>
     <string name="cine">Ir al cine</string>
-    <string name="carino">CariÃ±oso/a</string>
-    <string name="atras">AtrÃ¡s</string>
+    <string name="carino">Cariñoso/a</string>
+    <string name="atras">Atrás</string>
     <string name="formulario2">Datos personales</string>
-    <string name="p1d">Pregunta nÂº1:Â¿CÃºal es tu sexo?  </string>
-    <string name="p2d">Pregunta nÂº2:Â¿CÃºal es tu color de ojos?  </string>
-    <string name="p3d">Pregunta nÂº3:Â¿CÃºal es tu color de pelo?  </string>
-    <string name="p4d">Pregunta nÂº4:Â¿CÃ³mo te describirÃ­as?(Marque 3 opciones)  </string>
-    <string name="p5d">Pregunta nÂº5:Â¿CÃºales son tus hobbies?(Marque las que quiera)  </string>
+    <string name="p1d">Pregunta nº1:¿Cúal es tu sexo?  </string>
+    <string name="p2d">Pregunta nº2:¿Cúal es tu color de ojos?  </string>
+    <string name="p3d">Pregunta nº3:¿Cúal es tu color de pelo?  </string>
+    <string name="p4d">Pregunta nº4:¿Cómo te describirías?(Marque 3 opciones)  </string>
+    <string name="p5d">Pregunta nº5:¿Cúales son tus hobbies?(Marque las que quiera)  </string>
     <string name="start_chat">Empezar a chatear</string>
-    <string name="load_next">Siguiente dÃºo</string>
+    <string name="load_next">Siguiente dúo</string>
 
 </resources>
