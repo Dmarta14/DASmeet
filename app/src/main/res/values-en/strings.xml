@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DasMeet</string>
+    <string name="ajustes">Settings</string>
+    <string name="perfil">Account</string>
+    <string name="notificaciones">Notifications</string>
+    <string name="idioma">Languaje</string>
+    <string name="tema">Display</string>
+    <string name="cerrar">Log out</string>
+    <string name="eliminar">Delete account</string>
+    <string name="aspecto">Appearance</string>
+    <string name="claro">Ligth</string>
+    <string name="oscuro">Dark</string>
+    <string name="esp">Spanish</string>
+    <string name="ing">English</string>
+    <string name="guardar">Save</string>
+    <string name="Gustos">Change your preferences </string>
+    <string name="datos">Change your data</string>
+    <string name="contra">password</string>
+    <string name="usuario">username</string>
+    <string name="camara">Camera</string>
+    <string name="galeria">Gallery</string>
+    <string name="formulario1">Preferences the other person should have. You can select multiple options for each question.</string>
+
+    <string name="p1g"> Question nº1:What is the gender you are attracted to?</string>
+    <string name="h">Male</string>
+    <string name="m">Female</string>
+    <string name="o">Other</string>
+    <string name="p2g">Question nº2:What is your preferred eye color?</string>
+    <string name="marrones">Brown</string>
+    <string name="azules">Blue</string>
+    <string name="verdes">Green</string>
+    <string name="p3g">Question nº3:What is your preferred hair color?</string>
+    <string name="rubio">Blonde</string>
+    <string name="castano">Brown</string>
+    <string name="moreno">Brunette</string>
+    <string name="op">Other (Red, Blue, Green, Pink...)</string>
+    <string name="p4g">Question nº4What qualities do you like in a person?</string>
+    <string name="gracioso">Funny</string>
+    <string name="alegre">Cheerful</string>
+    <string name="simpatic">Friendly</string>
+    <string name="borde">Rude</string>
+    <string name="cabezon">Stubborn</string>
+    <string name="humilde">Humble</string>
+    <string name="fiel">Loyal</string>
+    <string name="impuntual">Punctuality</string>
+    <string name="p5g">Question nº5:What hobbies would you like the other person to have?</string>
+    <string name="leer">Reading</string>
+    <string name="deporte">Sports</string>
+    <string name="fiesta">Going out</string>
+    <string name="cine">Going to the cinema</string>
+    <string name="carino">Affectionate</string>
+    <string name="atras">Back</string>
+    <string name="formulario2">Personal Information</string>
+    <string name="p1d">Question nº1: What is your gender?</string>
+    <string name="p2d">Question nº2: What is your eye color?</string>
+    <string name="p3d">Question nº3: What is your hair color?</string>
+    <string name="p4d">Question nº4: How would you describe yourself? (Select 3 options)</string>
+    <string name="p5d">Question nº5: What are your hobbies? (Select as many as you want)</string>
+
+</resources>
