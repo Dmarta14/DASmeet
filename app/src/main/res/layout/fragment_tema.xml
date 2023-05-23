@@ -38,13 +38,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="150dp"
-            android:text="Modo Claro" />
+            android:text="@string/claro" />
 
         <RadioButton
             android:id="@+id/radioButtonModoOscuro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Modo Oscuro" />
+            android:text="@string/oscuro" />
 
     </RadioGroup>
 
@@ -80,9 +80,9 @@
         android:src="@drawable/baseline_arrow_back_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintHorizontal_bias="0.048"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.798" />
+        app:layout_constraintVertical_bias="0.786" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

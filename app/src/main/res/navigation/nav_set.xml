@@ -6,7 +6,7 @@
     app:startDestination="@id/SettingsFragment">
     <fragment
         android:id="@+id/SettingsFragment"
-        android:name="com.example.myapplication.SettingsFragment"
+        android:name="com.example.dasmeet.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/PerfilFragment"
-        android:name="com.example.myapplication.PerfilFragment"
+        android:name="com.example.dasmeet.PerfilFragment"
         android:label="fragment_perfil"
         tools:layout="@layout/fragment_perfil" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/NotificacionesFragment"
-        android:name="com.example.myapplication.NotificacionesFragment"
+        android:name="com.example.dasmeet.NotificacionesFragment"
         android:label="fragment_notificaciones"
         tools:layout="@layout/fragment_notificaciones" >
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/IdiomaFragment"
-        android:name="com.example.myapplication.IdiomaFragment"
+        android:name="com.example.dasmeet.IdiomaFragment"
         android:label="fragment_idioma"
         tools:layout="@layout/fragment_idioma" >
         <action
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/TemaFragment"
-        android:name="com.example.myapplication.TemaFragment"
+        android:name="com.example.dasmeet.TemaFragment"
         android:label="fragment_tema"
         tools:layout="@layout/fragment_tema" >
         <action

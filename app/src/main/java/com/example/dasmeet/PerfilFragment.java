@@ -24,12 +24,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import android.os.FileUtils;
+
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -37,6 +36,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -110,18 +110,14 @@ public class PerfilFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Bundle args = getArguments();
-        if (args != null) {
-            correo= args.getString("mail");
-            System.out.println("el nombre que ha llegado es: "+correo);
 
-        }
 
         ImageButton imageButton = view.findViewById(R.id.imageButton3);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(view);
-                //navController.navigate(R.id.action_PerfilFragment_to_GustosFragment);
+                navController.navigate(R.id.action_perfilFragment_to_gustosFragment);
 
             }
         });
@@ -130,7 +126,7 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(view);
-                //navController.navigate(R.id.action_PerfilFragment_to_DatosFragment);
+                navController.navigate(R.id.action_perfilFragment_to_datosFragment);
 
             }
         });
@@ -188,14 +184,15 @@ public class PerfilFragment extends Fragment {
                         byte[] byteArray = stream.toByteArray();
                         String photo64 = Base64.encodeToString(byteArray,Base64.DEFAULT);
 
-
+                        FileUtils fileUtils = new FileUtils();
+                        String mail = fileUtils.readFile(getContext(), "config.txt");
 
                         // HTTP request to save the photo to database
                         String url = "http://" + "192.168.1.116" + ":3005/insertarFoto";
                         JSONObject requestBody = new JSONObject();
 
                         try {
-                            requestBody.put("mail", correo);
+                            requestBody.put("mail", mail);
                             requestBody.put("image", photo64);
 
                         } catch (JSONException e) {
@@ -214,15 +211,15 @@ public class PerfilFragment extends Fragment {
                     }
                 });
 
-        // Retrieve the image from the database
-
+        FileUtils fileUtils = new FileUtils();
+        String mail = fileUtils.readFile(getContext(), "config.txt");
 
         String url = "http://" + "192.168.1.116" + ":3005/insertarFoto";
         JSONObject requestBody = new JSONObject();
 
         try {
 
-            requestBody.put("mail", correo);
+            requestBody.put("mail", mail);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -256,13 +253,8 @@ public class PerfilFragment extends Fragment {
             takeAPhoto();
         });
     }
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Bundle b = new Bundle();
-        b.putString("correo", correo);
-        outState.putBundle("correo", b);
-    }
+
+
 
     // Adjust the image size to be bigger than the one taken
     private Bitmap adjustImageSize(Bitmap bitmap) {

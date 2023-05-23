@@ -285,6 +285,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/impuntual" />
+                        <CheckBox
+                            android:id="@+id/opcion19"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/carino" />
 
                     </RadioGroup>
 
@@ -305,32 +310,32 @@
                         android:layout_height="wrap_content">
 
                         <CheckBox
-                            android:id="@+id/opcion19"
+                            android:id="@+id/opcion20"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/leer" />
 
                         <CheckBox
-                            android:id="@+id/opcion20"
+                            android:id="@+id/opcion21"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/deporte" />
 
                         <CheckBox
-                            android:id="@+id/opcion21"
+                            android:id="@+id/opcion22"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/fiesta" />
 
                         <CheckBox
-                            android:id="@+id/opcion22"
+                            android:id="@+id/opcion23"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/cine" />
 
 
                         <CheckBox
-                            android:id="@+id/opcion23"
+                            android:id="@+id/opcion24"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/o" />
@@ -341,41 +346,31 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:orientation="horizontal">
-
-                        <Button
-                            android:id="@+id/Guardar"
+                        <ImageView
+                            android:id="@+id/Cancelar"
                             android:layout_width="160dp"
                             android:layout_height="50dp"
                             android:layout_marginLeft="2dp"
                             android:layout_marginTop="8dp"
-                            android:backgroundTint="#D200BCD4"
-                            android:onClick="registrarUsuario"
-                            android:text="@string/guardar"
-                            android:textColor="#FFFFFF"
-                            android:textSize="20sp"
-                            android:textStyle="italic"
-                            android:cornerRadius="20dp"
-                            android:iconPadding="2dp" />
+
+                            android:src="@drawable/baseline_arrow_back_24"
+
+                            />
+
 
                         <TextView
 
                             android:layout_width="20dp"
                             android:layout_height="14dp" />
 
-                        <Button
-                            android:id="@+id/Cancelar"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        <ImageView
+                            android:id="@+id/Guardar"
                             android:layout_width="155dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="8dp"
-                            android:backgroundTint="#1DF7F7F6"
-                            android:onClick="cerrarPantalla"
-                            android:text="@string/atras"
-                            android:textColor="#03A9F4"
-                            android:textSize="20sp"
-                            android:cornerRadius="100dp"
-                            android:iconPadding="2dp"
-                            android:strokeColor="#03A9F4" />
+
+                            android:src="@drawable/baseline_save_24"
+                            />
 
                     </LinearLayout>
 
