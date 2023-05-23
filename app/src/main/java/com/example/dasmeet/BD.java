@@ -38,7 +38,7 @@ public class BD extends Worker{
                 /*
                  *  HTTP Request to insert a user into Usuario table
                  */
-                String dir = "http://192.168.0.22:3005/create";
+                String dir = "http://192.168.1.116:3005/create";
                 HttpURLConnection urlConnection;
 
                 String usuario = getInputData().getString("nombre");
@@ -99,7 +99,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
                 String mail =  getInputData().getString("mail");
-                String dir = "http://192.168.0.22:3005/existeUsuarioCorreo?mail=" + mail;
+                String dir = "http://192.168.1.116:3005/existeUsuarioCorreo?mail=" + mail;
                 try {
                     URL dest =new URL(dir);
                     urlConnection = (HttpURLConnection) dest.openConnection();
@@ -140,7 +140,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.0.22:3005/introducirDatos";
+                String dir = "http://192.168.1.116:3005/introducirDatos";
                 String sexo =  getInputData().getString("sexo");
                 String ojos =  getInputData().getString("ojo");
                 String pelo =  getInputData().getString("pelo");
@@ -196,7 +196,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.0.22:3005/introducirPersonalidad";
+                String dir = "http://192.168.1.116:3005/introducirPersonalidad";
                 boolean gracioso =  getInputData().getBoolean("gracioso",false);
                 int intGracioso = gracioso ? 1 : 0;
                 boolean alegre =  getInputData().getBoolean("alegre", false);
@@ -273,7 +273,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.0.22:3005/introducirHobbies";
+                String dir = "http://192.168.1.116:3005/introducirHobbies";
                 boolean leer =  getInputData().getBoolean("leer",false);
                 int intLeer = leer ? 1 : 0;
                 boolean deporte =  getInputData().getBoolean("deporte", false);
@@ -337,7 +337,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.0.22:3005/seleccionarGustoSexo";
+                String dir = "http://192.168.1.116:3005/seleccionarGustoSexo";
                 boolean hombre =  getInputData().getBoolean("hombre",false);
                 int intHombre = hombre ? 1 : 0;
                 boolean mujer =  getInputData().getBoolean("mujer", false);
@@ -396,7 +396,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.0.22:3005/seleccionarGustoOjo";
+                String dir = "http://192.168.1.116:3005/seleccionarGustoOjo";
                 boolean marron =  getInputData().getBoolean("marron",false);
                 int intMarron = marron ? 1 : 0;
                 boolean azul =  getInputData().getBoolean("azul", false);
@@ -454,7 +454,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.0.22:3005/seleccionarGustoPelo";
+                String dir = "http://192.168.1.116:3005/seleccionarGustoPelo";
                 boolean rubio =  getInputData().getBoolean("rubio",false);
                 int intRubio = rubio ? 1 : 0;
                 boolean castano =  getInputData().getBoolean("castano", false);
@@ -515,7 +515,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.0.22:3005/introducirHobbiesGusto";
+                String dir = "http://192.168.1.116:3005/introducirHobbiesGusto";
                 boolean leer =  getInputData().getBoolean("leer",false);
                 int intLeer = leer ? 1 : 0;
                 boolean deporte =  getInputData().getBoolean("deporte", false);
@@ -580,7 +580,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.0.22:3005/introducirPersonalidadGusto";
+                String dir = "http://192.168.1.116:3005/introducirPersonalidadGusto";
                 boolean gracioso =  getInputData().getBoolean("gracioso",false);
                 int intGracioso = gracioso ? 1 : 0;
                 boolean alegre =  getInputData().getBoolean("alegre", false);

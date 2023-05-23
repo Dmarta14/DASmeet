@@ -30,6 +30,12 @@
         <action
             android:id="@+id/action_PerfilFragment_to_SettingsFragment"
             app:destination="@id/SettingsFragment" />
+        <action
+            android:id="@+id/action_PerfilFragment_to_datosFragment"
+            app:destination="@id/datosFragment" />
+        <action
+            android:id="@+id/action_PerfilFragment_to_gustosFragment"
+            app:destination="@id/gustosFragment" />
 
     </fragment>
     <fragment
@@ -61,5 +67,23 @@
             android:id="@+id/action_TemaFragment_to_SettingsFragment"
             app:destination="@id/SettingsFragment" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/datosFragment"
+        android:name="com.example.dasmeet.DatosFragment"
+        android:label="fragment_datos"
+        tools:layout="@layout/fragment_datos" >
+        <action
+            android:id="@+id/action_datosFragment_to_PerfilFragment"
+            app:destination="@id/PerfilFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gustosFragment"
+        android:name="com.example.dasmeet.GustosFragment"
+        android:label="fragment_gustos"
+        tools:layout="@layout/fragment_gustos" >
+        <action
+            android:id="@+id/action_gustosFragment_to_PerfilFragment"
+            app:destination="@id/PerfilFragment" />
     </fragment>
 </navigation>

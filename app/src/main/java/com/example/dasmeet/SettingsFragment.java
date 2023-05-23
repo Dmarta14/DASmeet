@@ -17,6 +17,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 
@@ -122,8 +125,22 @@ public class SettingsFragment extends Fragment {
                         navController.navigate(R.id.action_SettingsFragment_to_TemaFragment);
                         break;
                     case 4:
+                        //ir al inicio
                         break;
                     case 5:
+                        FileUtils fileUtils = new FileUtils();
+                        String mail = fileUtils.readFile(getContext(), "config.txt");
+
+                        String url = "http://" + "192.168.1.116" + ":3005/eliminarUsuario";
+                        JSONObject requestBody = new JSONObject();
+
+                        try {
+
+                            requestBody.put("mail", mail);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                        //Ir al inicio
                         break;
 
                     default:

@@ -43,7 +43,7 @@ public class DatosFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_datosFragment_to_perfilFragment);
+                navController.navigate(R.id.action_datosFragment_to_PerfilFragment);
             }
         });
 
@@ -157,7 +157,7 @@ public class DatosFragment extends Fragment {
 
                 anadirHobbies(bleer,bdeporte,bfiesta,bcine,botro,mail);
                 NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_datosFragment_to_perfilFragment);
+                navController.navigate(R.id.action_datosFragment_to_PerfilFragment);
             }
         });
         return view;

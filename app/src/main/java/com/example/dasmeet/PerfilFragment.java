@@ -67,7 +67,7 @@ public class PerfilFragment extends Fragment {
 
     private ImageView imageView;
 
-    private String correo;
+
     public PerfilFragment() {
         // Required empty public constructor
     }
@@ -101,7 +101,7 @@ public class PerfilFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_perfil, container, false);
 
 
         return view;
@@ -109,24 +109,24 @@ public class PerfilFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Bundle args = getArguments();
 
 
-        ImageButton imageButton = view.findViewById(R.id.imageButton3);
+
+        ImageButton imageButton = view.findViewById(R.id.imagegustos);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.action_perfilFragment_to_gustosFragment);
+                navController.navigate(R.id.action_PerfilFragment_to_gustosFragment);
 
             }
         });
-        ImageButton imageButton2 = view.findViewById(R.id.imageButton4);
+        ImageButton imageButton2 = view.findViewById(R.id.imagedatos);
         imageButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.action_perfilFragment_to_datosFragment);
+                navController.navigate(R.id.action_PerfilFragment_to_datosFragment);
 
             }
         });
@@ -134,7 +134,7 @@ public class PerfilFragment extends Fragment {
                 new ActivityResultContracts.RequestPermission(),
                 isGranted -> {
                     if (isGranted) {
-                        abrirCamara(correo,view);
+                        abrirCamara(view);
                     } else {
 
                         Toast.makeText(getActivity(),
@@ -150,16 +150,9 @@ public class PerfilFragment extends Fragment {
                     PackageManager.PERMISSION_GRANTED) {
                 requestPermissionLauncher.launch(CAMERA);
             } else {
-                abrirCamara(correo,view);
+                abrirCamara(view);
             }
         });
-
-
-    }
-
-    public void abrirCamara(String correo,View view){
-        imageView = view.findViewById(R.id.imageView);
-        // Create the registerForActivityResult to get the data after taking the photo
         imageCaptureLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(), result -> {
                     if (result.getResultCode() == RESULT_OK) {
@@ -210,6 +203,14 @@ public class PerfilFragment extends Fragment {
                         queue.add(request);
                     }
                 });
+
+
+    }
+
+    public void abrirCamara(View view){
+        imageView = view.findViewById(R.id.imageView);
+        // Create the registerForActivityResult to get the data after taking the photo
+
 
         FileUtils fileUtils = new FileUtils();
         String mail = fileUtils.readFile(getContext(), "config.txt");
@@ -278,6 +279,7 @@ public class PerfilFragment extends Fragment {
             imageCaptureLauncher.launch(takePictureIntent);
         }
     }
+
 
 
 

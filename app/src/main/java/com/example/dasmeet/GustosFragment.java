@@ -45,7 +45,7 @@ public class GustosFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_gustosFragment_to_perfilFragment);
+                navController.navigate(R.id.action_gustosFragment_to_PerfilFragment);
             }
         });
         hombre=view.findViewById(R.id.opcion1);
@@ -76,7 +76,7 @@ public class GustosFragment extends Fragment {
 
         FileUtils fUtils =new FileUtils();
         String mail = fUtils.readFile(getContext(), "config.txt");
-        Button siguiente = view.findViewById(R.id.Guardar);
+        ImageView siguiente = view.findViewById(R.id.Guardar);
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,7 +172,7 @@ public class GustosFragment extends Fragment {
                 Toast.makeText(getContext(), "Regitro completado", Toast.LENGTH_LONG).show();
 
                 NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_gustosFragment_to_perfilFragment);
+                navController.navigate(R.id.action_gustosFragment_to_PerfilFragment);
             }
         });
 
