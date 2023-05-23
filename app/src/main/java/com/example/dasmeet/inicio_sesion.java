@@ -34,7 +34,7 @@ public class inicio_sesion extends AppCompatActivity {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_inicio_sesion);
 
-        TextView usua =findViewById (R.id.UsuarioIni);
+        TextView mail =findViewById (R.id.UsuarioIni);
         TextView contrasena1 = findViewById (R.id.PasswordIni);
         TextView registrar = findViewById(R.id.Registrarse);
 
@@ -42,9 +42,9 @@ public class inicio_sesion extends AppCompatActivity {
         Button iniciar_sesion = findViewById(R.id.Acceder);
         iniciar_sesion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String usuario = usua.getText().toString();
+                String email = mail.getText().toString();
                 String contra1 = contrasena1.getText().toString ();
-                //obtenerUsuario (usuario, contra1);
+                obtenerUsuario (email, contra1);
             }
         });
 
@@ -59,15 +59,16 @@ public class inicio_sesion extends AppCompatActivity {
     }
 
 
-    /*public void obtenerUsuario(String usuario, String contra){
+    public void obtenerUsuario(String usuario, String contra){
         Data param =new Data .Builder ()
-                .putString ("param","Acceder")
-                .putString ("usuario", usuario)
+                .putString ("param","ExisteUsuarioContra")
+                .putString ("mail", usuario)
                 .putString ("contrasena",contra).build ();
+        Log.d("Prueba inicio",""+  param);
         OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(BD.class).setInputData(param).build();
-        WorkManager.getInstance(MainActivity.this).enqueue(oneTimeWorkRequest);
-        WorkManager.getInstance(MainActivity.this).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId())
-                .observe (MainActivity.this, new Observer<WorkInfo> () {
+        WorkManager.getInstance(inicio_sesion.this).enqueue(oneTimeWorkRequest);
+        WorkManager.getInstance(inicio_sesion.this).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId())
+                .observe (inicio_sesion.this, new Observer<WorkInfo> () {
                     @Override
                     public void onChanged(WorkInfo workInfo) {
                         if (workInfo != null && workInfo.getState().isFinished()) {
@@ -75,23 +76,23 @@ public class inicio_sesion extends AppCompatActivity {
                                 Toast.makeText (getApplicationContext (),"ERROR",Toast.LENGTH_LONG).show ();
                             }else{
                                 Data d = workInfo.getOutputData();
-                                boolean b = d.getBoolean("result",false);
+                                boolean b = d.getBoolean("existe",false);
+                                Log.d("Prueba inicio", "" + b);
                                 if(b){
                                     Toast.makeText(getApplicationContext(), "existe un usuario", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(getApplicationContext(),Menu_Principal.class);
-                                    intent.putExtra("usuario",usuario); //pasando el mail como parametro
-                                    //abrir el activity del menu de opciones
+                                    saveSession(usuario);
                                     startActivity(intent);
                                     finish();
                                 }
                                 else {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder (MainActivity.this);
+                                    AlertDialog.Builder builder = new AlertDialog.Builder (inicio_sesion.this);
                                     builder.setTitle("Usuario o contraseña incorrectos");
                                     builder.setMessage("Introduce el usuario o contraseña correctamente o registrese en caso de no tener un usuario creado");
                                     builder.setPositiveButton("Volver", new DialogInterface.OnClickListener () {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
-                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            Intent intent = new Intent(getApplicationContext(), inicio_sesion.class);
                                             startActivity(intent);
                                         }
                                     });
@@ -104,7 +105,7 @@ public class inicio_sesion extends AppCompatActivity {
                         }
                     }
                 });
-    }*/
+    }
     public void saveSession(String mail) {
         try {
             OutputStreamWriter outputStreamWriter =

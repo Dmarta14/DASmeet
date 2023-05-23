@@ -149,10 +149,6 @@ public class FormularioGustos extends AppCompatActivity {
 
                 anadirHobbies(bleer,bdeporte,bfiesta,bcine,botro,mail);
 
-
-
-
-
                 Toast.makeText(getApplicationContext(), "Regitro completado", Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(v.getContext(),inicio_sesion.class);

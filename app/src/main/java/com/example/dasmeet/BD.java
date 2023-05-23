@@ -92,7 +92,7 @@ public class BD extends Worker{
             case "ExisteUsuarioCorreo":{
 
                 /*
-                 *  HTTP Request to insert a user into Usuario table
+                 *  HTTP Request to select a user to Usuario table
                  */
 
                 HttpURLConnection urlConnection;
@@ -624,6 +624,49 @@ public class BD extends Worker{
                     int statusCode = urlConnection.getResponseCode();
                     String code =String.valueOf(statusCode);
                     Log.d("Personalidad Prueba",code);
+                    if (statusCode == 200) {
+                        BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                        String line;
+                        StringBuilder result = new StringBuilder();
+                        while ((line = bufferedReader.readLine()) != null) {
+                            result.append(line);
+                        }
+                        inputStream.close();
+                        JSONParser parser = new JSONParser();
+                        JSONObject json = (JSONObject) parser.parse(result.toString());
+                        Log.i("JSON", "doWork: " + json);
+
+                        Data.Builder b = new Data.Builder();
+                        return Result.success(b.putBoolean("existe",(boolean) json.get("success")).build());
+                    }
+                } catch (Exception e) {
+                    Log.e("EXCEPTION", "doWork: ", e);
+                    return Result.failure();
+                }
+                break;
+            }
+            case "ExisteUsuarioContra":{
+
+                /*
+                 *  HTTP Request to select a user Usuario table
+                 */
+
+                HttpURLConnection urlConnection;
+                String contra =  getInputData().getString("contrasena");
+                String mail =  getInputData().getString("mail");
+                Log.d("Prueba inicio", "" + contra);
+                Log.d("Prueba inicio", "" + mail);
+                String dir = "http://192.168.0.22:3005/existeUsuarioContra?mail=" + mail+ "&password=" + contra;
+                try {
+                    URL dest =new URL(dir);
+                    urlConnection = (HttpURLConnection) dest.openConnection();
+                    urlConnection.setConnectTimeout(5000);
+                    urlConnection.setReadTimeout(5000);
+                    urlConnection.setRequestMethod("GET");
+                    int statusCode = urlConnection.getResponseCode();
+                    String code =String.valueOf(statusCode);
+                    Log.d("Prueba",code);
                     if (statusCode == 200) {
                         BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
                         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
