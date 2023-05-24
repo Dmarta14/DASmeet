@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dasmeet.inicio_sesion">
+    tools:context="com.example.dasmeet.InicioSesion">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -133,7 +133,6 @@
                         android:layout_width="138dp"
                         android:layout_height="50dp"
                         android:backgroundTint="#D200BCD4"
-                        android:onClick="registrarUsuario"
                         android:text="@string/acceder"
                         android:textColor="#FFFFFF"
                         android:textSize="20sp"

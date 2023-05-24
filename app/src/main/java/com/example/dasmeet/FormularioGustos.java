@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,7 +54,7 @@ public class FormularioGustos extends AppCompatActivity {
         otro=findViewById(R.id.opcion24);
         FileUtils fUtils =new FileUtils();
         String mail = fUtils.readFile(getApplicationContext(), "config.txt");
-        Button volver = findViewById(R.id.Cancelar);
+        ImageView volver = findViewById(R.id.Cancelar);
         volver.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 eliminarDatosUsuario(mail);
@@ -65,7 +66,7 @@ public class FormularioGustos extends AppCompatActivity {
         });
 
 
-        Button siguiente = findViewById(R.id.Siguiente);
+        ImageView siguiente = findViewById(R.id.Guardar);
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

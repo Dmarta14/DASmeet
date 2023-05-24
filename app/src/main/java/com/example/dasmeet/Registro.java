@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,14 +42,14 @@ public class Registro extends AppCompatActivity {
         contrasena2 = findViewById(R.id.PasswordConfirmada);
         fechanacimiento = findViewById(R.id.et_nacimiento);
         descripcion = findViewById(R.id.descripcion);
+        ImageView volver = findViewById(R.id.Cancelar);
 
-        Button volver = findViewById(R.id.Cancelar);
         volver.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), InicioSesion.class);
             startActivity(intent);
         });
 
-        Button siguiente = findViewById(R.id.Siguiente);
+        ImageView siguiente = findViewById(R.id.Guardar);
         siguiente.setOnClickListener(v -> {
             String usuario = usu.getText().toString();
             String contra1 = contrasena1.getText().toString();

@@ -224,36 +224,28 @@
                         android:layout_height="60dp"
                         android:orientation="horizontal">
 
-                        <Button
+                        <ImageView
                             android:id="@+id/Cancelar"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="160dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/baseline_arrow_back_24"
+
+                            />
+
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="14dp" />
+
+                        <ImageView
+                            android:id="@+id/Guardar"
                             android:layout_width="155dp"
                             android:layout_height="50dp"
-                            android:backgroundTint="#1DF7F7F6"
-                            android:text="Volver"
-                            android:textColor="#03A9F4"
-                            android:textSize="20sp"
-                            app:cornerRadius="100dp"
-                            app:iconPadding="2dp"
-                            app:strokeColor="#03A9F4"
-                            android:layout_marginTop="8dp"/>
-                        <TextView
-                            android:id="@+id/textView126"
-                            android:layout_width="25dp"
-                            android:layout_height="14dp" />
-                        <Button
-                        android:id="@+id/Siguiente"
-                        android:layout_width="160dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="2dp"
-                        android:backgroundTint="#D200BCD4"
-                        android:layout_marginTop="8dp"
-                        android:text="SIGUIENTE"
-                        android:textColor="#FFFFFF"
-                        android:textSize="20sp"
-                        android:textStyle="italic"
-                        app:cornerRadius="20dp"
-                        app:iconPadding="2dp" />
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/baseline_save_24"
+                            />
+
 
 
                     </LinearLayout>
