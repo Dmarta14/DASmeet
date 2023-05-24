@@ -16,6 +16,9 @@ import com.example.dasmeet.databinding.ActivityMainBinding;
 import com.example.dasmeet.home.Home;
 import com.example.dasmeet.utils.FileUtils;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int HOME_ID = R.id.home_bar;
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new Home());
 
                 else if (i.getItemId() == CHAT_ID)
-                    return true;
+                    replaceFragment(new UsersListFragment());
                 else if (i.getItemId() == SETTINGS_ID)
                     replaceFragment(new SettingsFragment());
                 return true;
