@@ -133,14 +133,11 @@ public class SettingsFragment extends Fragment {
                     case 4:
                         FileUtils fileUtils = new FileUtils();
                         String mail = fileUtils.readFile(getContext(), "config.txt");
-                        String url = "http://" + "192.168.1.116" + ":3005/eliminarTodoUsuario";
-                        JSONObject requestBody = new JSONObject();
-                        try {
-                            requestBody.put("mail", mail);
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-                        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, url, requestBody,
+                        Log.d("tit",mail);
+                        String url = "http://" + "192.168.1.116" + ":3005/eliminarTodoUsuario?mail="+mail;
+
+
+                        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, url,null,
                                 response -> {
                                     try {
                                         if (response.getBoolean("success")) {
