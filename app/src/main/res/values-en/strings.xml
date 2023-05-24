@@ -61,5 +61,6 @@
     <string name="start_chat">Start chatting</string>
     <string name="load_next">Load next couple</string>
     <string name="contra_cambiar">Change password</string>
+    <string name="notification_sent">Notification sent</string>
 
 </resources>

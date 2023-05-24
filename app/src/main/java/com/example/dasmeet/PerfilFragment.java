@@ -120,7 +120,7 @@ public class PerfilFragment extends Fragment {
 
                         // Transform the photo to a Base64 String and compress it
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                         byte[] byteArray = stream.toByteArray();
                         String photo64 = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
@@ -268,7 +268,6 @@ public class PerfilFragment extends Fragment {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,
                 requestBody, response -> {
             try {
-                //Log.e("titosss", "aaaa"+ response.toString());
                 if (response.get("success").equals(true)) {
                     // The photo exists
                     String image64 = response.getString("Foto");

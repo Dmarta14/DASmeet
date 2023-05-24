@@ -56,30 +56,23 @@ public class IdiomaFragment extends Fragment {
         AdaptadorLista adap = new AdaptadorLista(getContext(), texto, imgs);
         lista.setAdapter(adap);
 
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println(texto.get(i));
-                NavController navController = Navigation.findNavController(view);
-                switch (i) {
-                    case 0:
-                        setAppLocale("es");
-                        // Navegar al fragmento de ajustes
-                        navController.navigate(R.id.action_IdiomaFragment_to_SettingsFragment);
-                        break;
-                    case 1:
-                        // Navegar al fragmento de idioma
-                        setAppLocale("en");
-                        navController.navigate(R.id.action_IdiomaFragment_to_SettingsFragment);
-                        break;
+        lista.setOnItemClickListener((adapterView, view1, i, l) -> {
+
+            switch (i) {
+                case 0:
+                    setAppLocale("es");
+                    break;
+                case 1:
+                    // Navegar al fragmento de idioma
+                    setAppLocale("en");
+                    break;
 
 
-                    default:
-                        // Valor de i no válido, realizar una acción alternativa o mostrar un mensaje de error
-                }
-
-
+                default:
+                    // Valor de i no válido, realizar una acción alternativa o mostrar un mensaje de error
             }
+
+
         });
 
 
@@ -96,6 +89,6 @@ public class IdiomaFragment extends Fragment {
 
         resources.updateConfiguration(configuration, displayMetrics);
 
-        requireActivity().recreate(); // Reinicia la actividad para que se aplique el nuevo idioma
+        requireActivity().recreate();
     }
 }
