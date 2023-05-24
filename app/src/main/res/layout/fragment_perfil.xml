@@ -11,7 +11,8 @@
         android:layout_width="413dp"
         android:layout_height="732dp"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:paddingTop="50dp"
+        android:background="#F2D7D5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,89 +27,113 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginBottom="16dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/botonCamara"
-                android:layout_width="166dp"
-                android:layout_height="34dp"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="@string/camara" />
+                android:gravity="center_horizontal"
+                android:text="@string/camara"
+                android:backgroundTint="#D200BCD4"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
 
         <TextView
             android:id="@+id/textView1"
-            android:layout_width="341dp"
+            android:layout_width="360dp"
             android:layout_height="31dp"
+            android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:text="@string/usuario" />
+            android:gravity="center"
+            android:text="@string/usuario"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="361dp"
-            android:layout_height="wrap_content"
+            android:layout_width="360dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:text="@string/contra" />
+            android:gravity="center"
+            android:text="@string/contra_cambiar"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/editTextcontra"
-            android:layout_width="361dp"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:minHeight="48dp" />
+
         <TextView
             android:id="@+id/textViewDescripcion"
-            android:layout_width="361dp"
-            android:layout_height="wrap_content"
+            android:layout_width="360dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:text="@string/descripcion" />
+            android:gravity="center_horizontal"
+            android:text="@string/descripcion"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/editTextdesc"
-            android:layout_width="361dp"
-            android:layout_height="36dp"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:minHeight="48dp" />
 
         <LinearLayout
-            android:layout_width="381dp"
-            android:layout_height="20dp"
+            android:layout_width="360dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp">
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="132dp"
-                android:layout_height="wrap_content"
-                android:text="@string/Gustos" />
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="@string/Gustos"
+                android:textSize="16sp" />
 
             <ImageButton
                 android:id="@+id/imagegustos"
                 android:layout_width="74dp"
-                android:layout_height="23dp"
+                android:layout_height="40dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/flecha" />
+                android:src="@drawable/flecha"
+                android:backgroundTint="#D200BCD4"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="390dp"
-            android:layout_height="21dp"
+            android:layout_width="360dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp">
 
             <TextView
                 android:id="@+id/textView4"
-                android:layout_width="133dp"
-                android:layout_height="wrap_content"
-                android:text="@string/datos" />
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="@string/datos"
+                android:textSize="16sp" />
 
             <ImageButton
                 android:id="@+id/imagedatos"
                 android:layout_width="75dp"
-                android:layout_height="22dp"
-
+                android:layout_height="40dp"
+                android:backgroundTint="#D200BCD4"
                 android:scaleType="fitCenter"
                 android:src="@drawable/flecha" />
 
@@ -116,16 +141,18 @@
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="365dp"
-            android:layout_height="305dp"
+            android:layout_width="360dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
             android:orientation="horizontal"
             android:padding="16dp">
 
             <ImageView
-				android:id="@+id/imageViewguardar"
+                android:id="@+id/imageViewguardar"
                 android:layout_width="70dp"
-                android:layout_height="30dp"                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="80dp"
                 android:src="@drawable/baseline_save_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />

@@ -72,7 +72,8 @@ import java.util.Map;
 
 public class PerfilFragment extends Fragment {
 
-	private TextView etcorreo, etcontra;
+    private TextView etcorreo;
+    private EditText etcontra,etdesc;
     private ActivityResultLauncher<Intent> imageCaptureLauncher;
     private ActivityResultLauncher<String> requestPermissionLauncher;
 
@@ -204,50 +205,44 @@ public class PerfilFragment extends Fragment {
 
         recogerFoto(view);
         ImageView guardar = getView().findViewById(R.id.imageViewguardar);
-        guardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                etcontra = getView().findViewById(R.id.editTextcontra);
-                String password = etcontra.getText().toString();
-                etdesc = getView().findViewById(R.id.editTextdesc);
-                String desc = etdesc.getText().toString();
+        guardar.setOnClickListener(v -> {
+            etcontra = getView().findViewById(R.id.editTextcontra);
+            String password = etcontra.getText().toString();
+            etdesc = getView().findViewById(R.id.editTextdesc);
+            String desc = etdesc.getText().toString();
 
-                String url = "http://" + "192.168.1.116" + ":3005/modificarContra";
-                JSONObject requestBody = new JSONObject();
+            String url = "http://" + "192.168.1.116" + ":3005/modificarContra";
+            JSONObject requestBody = new JSONObject();
 
+                try {
+
+                    requestBody.put("password", password);
+                    requestBody.put("mail", mail);
+                    requestBody.put("descripcion", desc);
+
+
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,
+                        requestBody, response -> {
                     try {
-
-                        requestBody.put("password", password);
-                        requestBody.put("mail", mail);
-                        requestBody.put("descripcion", desc);
-
-
+                        //Log.e("titosss", "aaaa"+ response.toString());
+                        if (response.get("success").equals(true)) {
+                            Toast.makeText(getContext(), "Guardado", Toast.LENGTH_SHORT).show();
+                        }
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
+                }, error -> {
+                    Log.e("PA", "ERROR", error);
+                });
 
-                    JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,
-                            requestBody, response -> {
-                        try {
-                            //Log.e("titosss", "aaaa"+ response.toString());
-                            if (response.get("success").equals(true)) {
-                                Toast.makeText(getContext(), "Guardado", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }, error -> {
-                        Log.e("PA", "ERROR", error);
-                    });
+                RequestQueue queue = Volley.newRequestQueue(getContext());
+                queue.add(request);
 
-                    RequestQueue queue = Volley.newRequestQueue(getContext());
-                    queue.add(request);
-
-                }
-
-
-
-        });
+            });
 
     }
 

@@ -60,5 +60,6 @@
     <string name="p5d">Question nº5: What are your hobbies? (Select as many as you want)</string>
     <string name="start_chat">Start chatting</string>
     <string name="load_next">Load next couple</string>
+    <string name="contra_cambiar">Change password</string>
 
 </resources>

@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
@@ -93,10 +92,8 @@ public class SettingsFragment extends Fragment {
                 case 4:
                     FileUtils fileUtils = new FileUtils();
                     String mail = fileUtils.readFile(getContext(), "config.txt");
-                        Log.d("tit",mail);
-                        String url = BD.getIp() + "/eliminarTodoUsuario?mail="+mail;
 
-                        try {
+                        String url = BD.getIp() + "/eliminarTodoUsuario?mail="+mail;
 
 						JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, url,null,
                                 response -> {
