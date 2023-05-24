@@ -58,7 +58,7 @@
     <string name="p4d">Pregunta nº4:¿Cómo te describirías?(Marque 3 opciones)  </string>
     <string name="p5d">Pregunta nº5:¿Cúales son tus hobbies?(Marque las que quiera)  </string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 
 </resources>
