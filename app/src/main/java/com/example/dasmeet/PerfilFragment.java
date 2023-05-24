@@ -3,14 +3,11 @@ package com.example.dasmeet;
 import static android.Manifest.permission.CAMERA;
 import static android.app.Activity.RESULT_OK;
 
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -19,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,32 +30,14 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dasmeet.utils.FileUtils;
 
-import android.provider.MediaStore;
-import android.util.Base64;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;import org.json.JSONException;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -65,22 +45,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class PerfilFragment extends Fragment {
 
     private TextView etcorreo;
-    private EditText etcontra,etdesc;
+    private EditText etcontra, etdesc;
     private ActivityResultLauncher<Intent> imageCaptureLauncher;
     private ActivityResultLauncher<String> requestPermissionLauncher;
 
     private ImageView imageView;
-
 
 
     @Override
@@ -144,11 +120,11 @@ public class PerfilFragment extends Fragment {
 
                         JsonObjectRequest request =
                                 new JsonObjectRequest(Request.Method.POST,
-                                url, requestBody, response -> {
-                            Log.d("PA", "SUCCESS");
-                        }, error -> {
-                            Log.e("PA", "ERROR", error);
-                        });
+                                        url, requestBody, response -> {
+                                    Log.d("PA", "SUCCESS");
+                                }, error -> {
+                                    Log.e("PA", "ERROR", error);
+                                });
 
                         RequestQueue queue = Volley.newRequestQueue(getContext());
                         queue.add(request);
@@ -213,35 +189,35 @@ public class PerfilFragment extends Fragment {
             String url = "http://" + "192.168.1.116" + ":3005/modificarContra";
             JSONObject requestBody = new JSONObject();
 
+            try {
+
+                requestBody.put("password", password);
+                requestBody.put("mail", mail);
+                requestBody.put("descripcion", desc);
+
+
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,
+                    requestBody, response -> {
                 try {
-
-                    requestBody.put("password", password);
-                    requestBody.put("mail", mail);
-                    requestBody.put("descripcion", desc);
-
-
+                    //Log.e("titosss", "aaaa"+ response.toString());
+                    if (response.get("success").equals(true)) {
+                        Toast.makeText(getContext(), "Guardado", Toast.LENGTH_SHORT).show();
+                    }
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,
-                        requestBody, response -> {
-                    try {
-                        //Log.e("titosss", "aaaa"+ response.toString());
-                        if (response.get("success").equals(true)) {
-                            Toast.makeText(getContext(), "Guardado", Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                }, error -> {
-                    Log.e("PA", "ERROR", error);
-                });
-
-                RequestQueue queue = Volley.newRequestQueue(getContext());
-                queue.add(request);
-
+            }, error -> {
+                Log.e("PA", "ERROR", error);
             });
+
+            RequestQueue queue = Volley.newRequestQueue(getContext());
+            queue.add(request);
+
+        });
 
     }
 
@@ -322,7 +298,8 @@ public class PerfilFragment extends Fragment {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, requestBody,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,
+                requestBody,
                 response -> {
                     try {
                         if (response.getBoolean("success")) {
@@ -344,7 +321,7 @@ public class PerfilFragment extends Fragment {
     }
 
     private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.replace(R.id.fragment_container, fragment);

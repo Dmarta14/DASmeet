@@ -35,15 +35,10 @@ public class DatosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_datos, container, false);
-
         ImageView imagenAtras = view.findViewById(R.id.Cancelar);
-        imagenAtras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
+        imagenAtras.setOnClickListener(v -> {
+            replaceFragment(new PerfilFragment());
         });
-
 
         gracioso=view.findViewById(R.id.opcion11);
         alegre=view.findViewById(R.id.opcion12);
@@ -62,99 +57,96 @@ public class DatosFragment extends Fragment {
 
 
         ImageView guardar = view.findViewById(R.id.Guardar);
-        guardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sexo = view.findViewById(R.id.radio_group_respuestas1);
-                selectSexo = sexo.getCheckedRadioButtonId();
-                Log.d("Prueba", "" + selectSexo);
-                FileUtils fUtils =new FileUtils();
-                String mail = fUtils.readFile(getContext(), "config.txt");
-                if(selectSexo != -1){
-                    RadioButton sexoSelecionado=view.findViewById(selectSexo);
-                    String respuestaSelecionadaSexo = sexoSelecionado.getText().toString();
+        guardar.setOnClickListener(v -> {
+            sexo = view.findViewById(R.id.radio_group_respuestas1);
+            selectSexo = sexo.getCheckedRadioButtonId();
+            Log.d("Prueba", "" + selectSexo);
+            FileUtils fUtils =new FileUtils();
+            String mail = fUtils.readFile(getContext(), "config.txt");
+            if(selectSexo != -1){
+                RadioButton sexoSelecionado=view.findViewById(selectSexo);
+                String respuestaSelecionadaSexo = sexoSelecionado.getText().toString();
 
-                    ojos = view.findViewById(R.id.radio_group_respuestas2);
-                    selectOjos = ojos.getCheckedRadioButtonId();
-                    Log.d("Prueba Ojo" , "" + selectOjos);
-                    if(selectOjos != -1){
-                        RadioButton ojosSelecionado= view.findViewById(selectOjos);
-                        Log.d("Prueba Ojo" , "" + ojosSelecionado);
-                        String respuestaSelecionadaOjo = ojosSelecionado.getText().toString();
-                        Log.d("Prueba Ojo" , "" + respuestaSelecionadaOjo);
+                ojos = view.findViewById(R.id.radio_group_respuestas2);
+                selectOjos = ojos.getCheckedRadioButtonId();
+                Log.d("Prueba Ojo" , "" + selectOjos);
+                if(selectOjos != -1){
+                    RadioButton ojosSelecionado= view.findViewById(selectOjos);
+                    Log.d("Prueba Ojo" , "" + ojosSelecionado);
+                    String respuestaSelecionadaOjo = ojosSelecionado.getText().toString();
+                    Log.d("Prueba Ojo" , "" + respuestaSelecionadaOjo);
 
-                        pelo = view.findViewById(R.id.radio_group_respuestas3);
-                        selectPelo = pelo.getCheckedRadioButtonId();
+                    pelo = view.findViewById(R.id.radio_group_respuestas3);
+                    selectPelo = pelo.getCheckedRadioButtonId();
 
-                        if(selectPelo != -1){
-                            RadioButton peloSelecionado= view.findViewById(selectPelo);
-                            String respuestaSelecionadaPelo = peloSelecionado.getText().toString();
+                    if(selectPelo != -1){
+                        RadioButton peloSelecionado= view.findViewById(selectPelo);
+                        String respuestaSelecionadaPelo = peloSelecionado.getText().toString();
 
-                            anadirDatos(respuestaSelecionadaSexo,respuestaSelecionadaOjo,respuestaSelecionadaPelo,mail);
-                        }
-
-                        else {
-                            Toast.makeText(getContext(), "Debes seleccionar un color de pelo en la pregunta 3", Toast.LENGTH_LONG).show();
-                        }
+                        anadirDatos(respuestaSelecionadaSexo,respuestaSelecionadaOjo,respuestaSelecionadaPelo,mail);
                     }
 
                     else {
-                        Toast.makeText(getContext(), "Debes seleccionar un color de ojos en la pregunta 2", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Debes seleccionar un color de pelo en la pregunta 3", Toast.LENGTH_LONG).show();
                     }
                 }
+
                 else {
-                    Toast.makeText(getContext(), "Debes seleccionar un sexo en la pregunta 1", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Debes seleccionar un color de ojos en la pregunta 2", Toast.LENGTH_LONG).show();
                 }
-
-                if (gracioso.isChecked()){
-                    bgracioso=true;
-                }
-                if(alegre.isChecked()){
-                    balegre=true;
-                }
-                if (simpatico.isChecked()){
-                    bsimpatico=true;
-                }
-                if(borde.isChecked()){
-                    bborde=true;
-                }
-                if (cabezon.isChecked()){
-                    bcabezon=true;
-                }
-                if(humilde.isChecked()){
-                    bhumilde=true;
-                }
-                if(fiel.isChecked()){
-                    bfiel=true;
-                }
-                if (impuntual.isChecked()){
-                    bimpuntual=true;
-                }
-                if(carinoso.isChecked()){
-                    bcarinoso=true;
-                }
-
-                anardirPersonalidad(bgracioso,balegre,bsimpatico,bborde,bcabezon,bhumilde,bfiel,bimpuntual,bcarinoso,mail);
-
-                if (leer.isChecked()){
-                    bleer=true;
-                }
-                if(deporte.isChecked()){
-                    bdeporte=true;
-                }
-                if (fiesta.isChecked()){
-                    bfiesta=true;
-                }
-                if(cine.isChecked()){
-                    bcine=true;
-                }
-                if (otro.isChecked()){
-                    botro=true;
-                }
-
-                anadirHobbies(bleer,bdeporte,bfiesta,bcine,botro,mail);
-                replaceFragment(new PerfilFragment());
             }
+            else {
+                Toast.makeText(getContext(), "Debes seleccionar un sexo en la pregunta 1", Toast.LENGTH_LONG).show();
+            }
+
+            if (gracioso.isChecked()){
+                bgracioso=true;
+            }
+            if(alegre.isChecked()){
+                balegre=true;
+            }
+            if (simpatico.isChecked()){
+                bsimpatico=true;
+            }
+            if(borde.isChecked()){
+                bborde=true;
+            }
+            if (cabezon.isChecked()){
+                bcabezon=true;
+            }
+            if(humilde.isChecked()){
+                bhumilde=true;
+            }
+            if(fiel.isChecked()){
+                bfiel=true;
+            }
+            if (impuntual.isChecked()){
+                bimpuntual=true;
+            }
+            if(carinoso.isChecked()){
+                bcarinoso=true;
+            }
+
+            anardirPersonalidad(bgracioso,balegre,bsimpatico,bborde,bcabezon,bhumilde,bfiel,bimpuntual,bcarinoso,mail);
+
+            if (leer.isChecked()){
+                bleer=true;
+            }
+            if(deporte.isChecked()){
+                bdeporte=true;
+            }
+            if (fiesta.isChecked()){
+                bfiesta=true;
+            }
+            if(cine.isChecked()){
+                bcine=true;
+            }
+            if (otro.isChecked()){
+                botro=true;
+            }
+
+            anadirHobbies(bleer,bdeporte,bfiesta,bcine,botro,mail);
+            replaceFragment(new PerfilFragment());
         });
         return view;
     }
@@ -169,7 +161,7 @@ public class DatosFragment extends Fragment {
 
         OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(BD.class).setInputData(param).build();
         WorkManager.getInstance(getContext()).enqueue(oneTimeWorkRequest);
-        WorkManager.getInstance(getContext()).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId()).observe(this, new Observer<WorkInfo>() {
+        WorkManager.getInstance(getContext()).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId()).observe(getViewLifecycleOwner(), new Observer<WorkInfo>() {
             @Override
             public void onChanged(WorkInfo workInfo) {
                 if (workInfo != null && workInfo.getState().isFinished()) {
@@ -195,7 +187,7 @@ public class DatosFragment extends Fragment {
                 .putString("mail",mail).build();
         OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(BD.class).setInputData(param).build();
         WorkManager.getInstance(getContext()).enqueue(oneTimeWorkRequest);
-        WorkManager.getInstance(getContext()).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId()).observe(this, new Observer<WorkInfo>() {
+        WorkManager.getInstance(getContext()).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId()).observe(getViewLifecycleOwner(), new Observer<WorkInfo>() {
             @Override
             public void onChanged(WorkInfo workInfo) {
                 if (workInfo != null && workInfo.getState().isFinished()) {
@@ -219,7 +211,7 @@ public class DatosFragment extends Fragment {
         Log.d("Prueba Hobbies",""+ param);
         OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(BD.class).setInputData(param).build();
         WorkManager.getInstance(getContext()).enqueue(oneTimeWorkRequest);
-        WorkManager.getInstance(getContext()).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId()).observe(this, new Observer<WorkInfo>() {
+        WorkManager.getInstance(getContext()).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId()).observe(getViewLifecycleOwner(), new Observer<WorkInfo>() {
             @Override
             public void onChanged(WorkInfo workInfo) {
                 if (workInfo != null && workInfo.getState().isFinished()) {
@@ -232,7 +224,7 @@ public class DatosFragment extends Fragment {
     }
 
     private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.replace(R.id.fragment_container, fragment);
