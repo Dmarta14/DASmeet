@@ -3,11 +3,14 @@ package com.example.dasmeet;
 import static android.Manifest.permission.CAMERA;
 import static android.app.Activity.RESULT_OK;
 
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -30,13 +33,29 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dasmeet.utils.FileUtils;
 
-import org.json.JSONException;
+import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -44,17 +63,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class PerfilFragment extends Fragment {
 
-    private TextView etcorreo, etcontra;
+	private TextView etcorreo, etcontra;
     private ActivityResultLauncher<Intent> imageCaptureLauncher;
     private ActivityResultLauncher<String> requestPermissionLauncher;
 
     private ImageView imageView;
+
 
 
     @Override
@@ -153,6 +176,7 @@ public class PerfilFragment extends Fragment {
 
         etcorreo = view.findViewById(R.id.textView1);
         etcorreo.setText(mail);
+        obtenerDes(view, mail);
 
         requestPermissionLauncher = registerForActivityResult(
                 new ActivityResultContracts.RequestPermission(),
@@ -177,8 +201,53 @@ public class PerfilFragment extends Fragment {
                 takeAPhoto();
             }
         });
-        recogerFoto(view);
 
+        recogerFoto(view);
+        ImageView guardar = getView().findViewById(R.id.imageViewguardar);
+        guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etcontra = getView().findViewById(R.id.editTextcontra);
+                String password = etcontra.getText().toString();
+                etdesc = getView().findViewById(R.id.editTextdesc);
+                String desc = etdesc.getText().toString();
+
+                String url = "http://" + "192.168.1.116" + ":3005/modificarContra";
+                JSONObject requestBody = new JSONObject();
+
+                    try {
+
+                        requestBody.put("password", password);
+                        requestBody.put("mail", mail);
+                        requestBody.put("descripcion", desc);
+
+
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,
+                            requestBody, response -> {
+                        try {
+                            //Log.e("titosss", "aaaa"+ response.toString());
+                            if (response.get("success").equals(true)) {
+                                Toast.makeText(getContext(), "Guardado", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }, error -> {
+                        Log.e("PA", "ERROR", error);
+                    });
+
+                    RequestQueue queue = Volley.newRequestQueue(getContext());
+                    queue.add(request);
+
+                }
+
+
+
+        });
 
     }
 
@@ -249,6 +318,38 @@ public class PerfilFragment extends Fragment {
             imageCaptureLauncher.launch(takePictureIntent);
         }
     }
+
+    private void obtenerDes(View view, String mail) {
+        etdesc = view.findViewById(R.id.editTextdesc);
+        etcontra = view.findViewById(R.id.editTextcontra);
+        String url = "http://" + "192.168.1.116" + ":3005/buscarcontraydesc";
+        JSONObject requestBody = new JSONObject();
+        try {
+            requestBody.put("mail", mail);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, requestBody,
+                response -> {
+                    try {
+                        if (response.getBoolean("success")) {
+                            String desc = response.getString("Descripcion");
+                            etdesc.setText(desc);
+
+
+                        }
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                error -> {
+                    Log.e("PA", "ERROR", error);
+                });
+
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        queue.add(request);
+    }
+
 
 
 }

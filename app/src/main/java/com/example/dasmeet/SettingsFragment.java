@@ -3,11 +3,13 @@ package com.example.dasmeet;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
@@ -19,8 +21,10 @@ import androidx.fragment.app.Fragment;
 
 
 import com.example.dasmeet.utils.FileUtils;
-
-import org.json.JSONException;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -89,17 +93,30 @@ public class SettingsFragment extends Fragment {
                 case 4:
                     FileUtils fileUtils = new FileUtils();
                     String mail = fileUtils.readFile(getContext(), "config.txt");
+                        Log.d("tit",mail);
+                        String url = BD.getIp() + "/eliminarTodoUsuario?mail="+mail;
 
-                    String url = BD.getIp() + "/eliminarUsuario";
-                    JSONObject requestBody = new JSONObject();
-                    try {
+                        try {
 
-                        requestBody.put("mail", mail);
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                    break;
+						JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, url,null,
+                                response -> {
+                                    try {
+                                        if (response.getBoolean("success")) {
+                                            Log.d("titoss","aaa");
 
+
+                                        }
+                                    } catch (JSONException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                },
+                                error -> {
+                                    Log.e("PA", "ERROR", error);
+                                });
+
+                        RequestQueue queue = Volley.newRequestQueue(getContext());
+                        queue.add(request);
+                        break;
 
                 default:
                     // Valor de i no válido, realizar una acción alternativa o mostrar un mensaje de error
@@ -111,13 +128,11 @@ public class SettingsFragment extends Fragment {
 
     }
 
-    private void replaceFragment(Fragment fragment) {
+	private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.replace(R.id.fragment_container, fragment);
 
         fragmentTransaction.commit();
-    }
-
-}
+    }}
