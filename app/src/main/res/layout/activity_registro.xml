@@ -21,7 +21,6 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F2D7D5"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +30,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="#F2D7D5"
                 android:orientation="vertical">
 
                 <TextView
@@ -110,7 +108,7 @@
                         android:layout_height="48dp"
                         android:background="@drawable/texto_form"
                         android:ems="10"
-                        android:hint="Usuario"
+                        android:hint="@string/Nombre"
                         android:inputType="textPersonName"
                         android:paddingLeft="20sp"
                         android:textColor="#6E7692"
@@ -127,7 +125,7 @@
                         android:layout_height="48dp"
                         android:background="@drawable/texto_form"
                         android:ems="10"
-                        android:hint="Correo Electrónico"
+                        android:hint="@string/usuario"
                         android:inputType="textEmailAddress"
                         android:paddingLeft="20sp"
                         android:textColor="#6E7692"
@@ -144,7 +142,7 @@
                         android:layout_height="48dp"
                         android:background="@drawable/texto_form"
                         android:ems="10"
-                        android:hint="Contraseña"
+                        android:hint="@string/contra"
                         android:inputType="textPassword"
                         android:paddingLeft="20sp"
                         android:textColor="#6E7692"
@@ -162,7 +160,7 @@
                         android:layout_height="48dp"
                         android:background="@drawable/texto_form"
                         android:ems="10"
-                        android:hint="Confirmar Contraseña"
+                        android:hint="@string/confirmarCon"
                         android:inputType="textPassword"
                         android:paddingLeft="20sp"
                         android:textColor="#6E7692"
@@ -180,7 +178,7 @@
                         android:background="@drawable/texto_form"
                         android:ems="10"
                         android:inputType="date"
-                        android:hint="Fecha Nacimiento"
+                        android:hint="@string/fechanacimiento"
                         android:importantForAutofill="no"
                         android:maxLines="1"
                         android:onClick="showDatePickerDialog"
@@ -199,7 +197,7 @@
                         android:background="@drawable/texto_form"
                         android:ems="10"
                         android:inputType="textAutoComplete"
-                        android:hint="Biografía"
+                        android:hint="@string/biografia"
                         android:importantForAutofill="no"
                         android:maxLines="1"
                         android:paddingLeft="20sp"
@@ -224,36 +222,28 @@
                         android:layout_height="60dp"
                         android:orientation="horizontal">
 
-                        <Button
+                        <ImageView
                             android:id="@+id/Cancelar"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="160dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/baseline_arrow_back_24"
+
+                            />
+
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="14dp" />
+
+                        <ImageView
+                            android:id="@+id/Guardar"
                             android:layout_width="155dp"
                             android:layout_height="50dp"
-                            android:backgroundTint="#1DF7F7F6"
-                            android:text="Volver"
-                            android:textColor="#03A9F4"
-                            android:textSize="20sp"
-                            app:cornerRadius="100dp"
-                            app:iconPadding="2dp"
-                            app:strokeColor="#03A9F4"
-                            android:layout_marginTop="8dp"/>
-                        <TextView
-                            android:id="@+id/textView126"
-                            android:layout_width="25dp"
-                            android:layout_height="14dp" />
-                        <Button
-                        android:id="@+id/Siguiente"
-                        android:layout_width="160dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="2dp"
-                        android:backgroundTint="#D200BCD4"
-                        android:layout_marginTop="8dp"
-                        android:text="SIGUIENTE"
-                        android:textColor="#FFFFFF"
-                        android:textSize="20sp"
-                        android:textStyle="italic"
-                        app:cornerRadius="20dp"
-                        app:iconPadding="2dp" />
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/baseline_save_24"
+                            />
+
 
 
                     </LinearLayout>

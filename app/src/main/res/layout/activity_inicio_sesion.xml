@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dasmeet.inicio_sesion">
+    tools:context="com.example.dasmeet.InicioSesion">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -75,7 +75,7 @@
                         android:id="@+id/textView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Inicio De Sesión"
+                        android:text="@string/inicio_sesion"
                         android:textAlignment="center"
                         android:textSize="24sp"
                         android:textStyle="bold" />
@@ -98,7 +98,7 @@
                         android:layout_height="48dp"
                         android:background="@drawable/texto_form"
                         android:ems="10"
-                        android:hint="Usuario"
+                        android:hint="@string/usuario"
                         android:inputType="textPersonName"
                         android:paddingLeft="20sp"
                         android:textColor="#6E7692"
@@ -116,7 +116,7 @@
                         android:layout_height="48dp"
                         android:background="@drawable/texto_form"
                         android:ems="10"
-                        android:hint="Contraseña"
+                        android:hint="@string/contra"
                         android:inputType="textPassword"
                         android:paddingLeft="20sp"
                         android:textColor="#6E7692"
@@ -133,8 +133,7 @@
                         android:layout_width="138dp"
                         android:layout_height="50dp"
                         android:backgroundTint="#D200BCD4"
-                        android:onClick="registrarUsuario"
-                        android:text="ACCEDER"
+                        android:text="@string/acceder"
                         android:textColor="#FFFFFF"
                         android:textSize="20sp"
                         android:textStyle="italic"
@@ -157,8 +156,8 @@
                             <TextView
                                 android:id="@+id/textView25"
                                 android:layout_width="220dp"
-                                android:layout_height="47dp"
-                                android:text="¿No tienes cuenta?"
+                                android:layout_height="80dp"
+                                android:text="@string/no_tienes_cuenta"
                                 android:textSize="24sp" />
 
                             <TextView
@@ -170,7 +169,7 @@
                                 android:id="@+id/Registrarse"
                                 android:layout_width="220dp"
                                 android:layout_height="47dp"
-                                android:text="Registrarse"
+                                android:text="@string/registrarse"
                                 android:textColor="#6363FF"
                                 android:textSize="24sp"
                                 android:textStyle="italic" />

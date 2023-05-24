@@ -2,7 +2,11 @@ package com.example.dasmeet;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -33,12 +38,16 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int HOME_ID = R.id.home_bar;
     private static final int CHAT_ID = R.id.chat_bar;
     private static final int SETTINGS_ID = R.id.settings_bar;
+
+    private static final String DEFAULT_LANGUAGE = "default";
+    private static final String DEFAULT_MODE = "default";
     ActivityMainBinding binding;
 
     @Override
@@ -51,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } else {
+            SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+
+            String idioma = sharedPreferences.getString("idioma", DEFAULT_LANGUAGE);
+            String modo = sharedPreferences.getString("modo", DEFAULT_MODE);
+            setLanguage(idioma);
+            setModo(modo);
             binding = ActivityMainBinding.inflate(getLayoutInflater());
             setContentView(binding.getRoot());
 
@@ -113,85 +128,28 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void openDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        //builder.setTitle(nom+" quiere conocerte");
-        LayoutInflater inflater=getLayoutInflater();
-        View elaspecto= inflater.inflate(R.layout.dialog_solicitud_chat,null);
-        builder.setView(elaspecto);
-        TextView nomusu= elaspecto.findViewById(R.id.nombreUsu);
-        //nomusu.setText(nom);
-        TextView fraseLigar= elaspecto.findViewById(R.id.fraseLigar);
-        //fraseLigar.setText(frase);
+    public void setLanguage(String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
 
-        Button btnAccept = elaspecto.findViewById(R.id.btnAccept);
-        Button btnReject = elaspecto.findViewById(R.id.btnReject);
+        Resources resources = getResources();
+        Configuration configuration = resources.getConfiguration();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
 
-        btnAccept.setOnClickListener(v -> {
-            AlertDialog.Builder builder2 = new AlertDialog.Builder(getApplicationContext());
-            builder2.setTitle("Match!");
-            builder2.setMessage("A partir de ahora teneis 24h para conoceros. Disfrutad!");
+        configuration.setLocale(locale);
 
-            builder2.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    builder2.create().dismiss();
-                    FileUtils fileUtils = new FileUtils();
+        resources.updateConfiguration(configuration, displayMetrics);
 
-                    String mail = fileUtils.readFile(getApplicationContext(), "config.txt");
+        // requireActivity().recreate(); // Reinicia la actividad para que se aplique el nuevo idioma
+    }
 
-                    String url = "http://192.168.1.74:3005/aceparSolicitud";
-                    JSONObject requestBody = new JSONObject();
+    public void setModo(String modo){
+        if(modo.equals("oscuro")){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else if (modo.equals("claro")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-                    try {
-                        requestBody.put("mail", mail);
-                        //requestBody.put("mail2", mail2);
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
+        }
 
-                    JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,
-                            requestBody, response -> {
-                        try {
-                            if (response.get("success").equals(true)) {
-                                // The photo exists
-                                Intent intent = new Intent(MainActivity.this, Chat.class);
-                                /*intent.putExtra("nombre", nom);
-                                intent.putExtra("mail1",mail2);*/
-                                intent.putExtra("fotoPerfil","");
-                                intent.putExtra("mailUser",mail);
-                                intent.putExtra("chatKey", "");
-                                //intent.putExtra("fotoPerfil",imgs.get(i));
-                                startActivity(intent);
-                                builder.create().dismiss();
-
-                            }
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }, error -> {
-                        Log.e("PA", "ERROR", error);
-                    });
-
-                    RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                    queue.add(request);
-
-                }
-
-
-            });
-            btnAccept.setOnClickListener(v1 -> builder2.create().dismiss());
-
-            builder2.create().show();
-
-        });
-
-        btnReject.setOnClickListener(v -> {
-            // Acción para rechazar
-            Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
-            builder.create().dismiss();
-        });
-
-        builder.create().show();
     }
 }

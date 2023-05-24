@@ -28,6 +28,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+
 public class Home extends Fragment {
 
     private ImageView imageView1;
@@ -109,12 +111,23 @@ public class Home extends Fragment {
     private void getFirstElements() {
         String url = BD.getIp() + "/user";
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null,
+        FileUtils fu = new FileUtils();
+        String mail = fu.readFile(getContext(), "config.txt");
+        JSONObject o = new JSONObject();
+        try {
+            o.put("mail", mail);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, o,
                 response -> {
                     try {
                         if (response.getJSONArray("userList").length() != 0) {
                             JSONArray a = response.getJSONArray("userList");
-                            for (int i = 0; i < 2; i++) {
+                            int maxSize = Math.min(a.length(), 2);
+                            Log.d("HOME", "getFirstElements: " + a);
+                            for (int i = 0; i < maxSize; i++) {
                                 JSONObject obj = a.getJSONObject(i);
                                 if (i % 2 == 0) {
                                     textViewName1.setText(obj.getString("Nombre"));

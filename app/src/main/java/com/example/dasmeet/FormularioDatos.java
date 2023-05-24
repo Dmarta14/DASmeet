@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -43,7 +44,7 @@ public class FormularioDatos  extends AppCompatActivity {
         fiesta=findViewById(R.id.opcion22);
         cine=findViewById(R.id.opcion23);
         otro=findViewById(R.id.opcion24);
-        Button volver = findViewById(R.id.Cancelar);
+        ImageView volver = findViewById(R.id.Cancelar);
 
         FileUtils fUtils =new FileUtils();
         String mail = fUtils.readFile(getApplicationContext(), "config.txt");
@@ -55,7 +56,7 @@ public class FormularioDatos  extends AppCompatActivity {
             }
         });
 
-        Button siguiente = findViewById(R.id.Siguiente);
+        ImageView siguiente = findViewById(R.id.Guardar);
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

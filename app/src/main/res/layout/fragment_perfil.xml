@@ -12,7 +12,6 @@
         android:layout_height="732dp"
         android:orientation="vertical"
         android:paddingTop="50dp"
-        android:background="#F2D7D5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +132,6 @@
                 android:id="@+id/imagedatos"
                 android:layout_width="75dp"
                 android:layout_height="40dp"
-                android:backgroundTint="#D200BCD4"
                 android:scaleType="fitCenter"
                 android:src="@drawable/flecha" />
 

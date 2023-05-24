@@ -4,7 +4,7 @@
     <string name="ajustes">Settings</string>
     <string name="perfil">Account</string>
     <string name="notificaciones">Notifications</string>
-    <string name="idioma">Languaje</string>
+    <string name="idioma">Language</string>
     <string name="tema">Display</string>
     <string name="cerrar">Log out</string>
     <string name="eliminar">Delete account</string>
@@ -16,13 +16,13 @@
     <string name="guardar">Save</string>
     <string name="Gustos">Change your preferences </string>
     <string name="datos">Change your data</string>
-    <string name="contra">password</string>
-    <string name="usuario">username</string>
+    <string name="contra">Password</string>
+    <string name="usuario">Mail</string>
     <string name="camara">Camera</string>
     <string name="galeria">Gallery</string>
     <string name="formulario1">Preferences the other person should have. You can select multiple options for each question.</string>
 
-    <string name="p1g"> Question nº1:What is the gender you are attracted to?</string>
+    <string name="p1g">Question nº1:What is the gender you are attracted to?</string>
     <string name="h">Male</string>
     <string name="m">Female</string>
     <string name="o">Other</string>
@@ -61,6 +61,13 @@
     <string name="start_chat">Start chatting</string>
     <string name="load_next">Load next couple</string>
     <string name="contra_cambiar">Change password</string>
-    <string name="notification_sent">Notification sent</string>
-
+    <string name="notification_sent">Notification sent</string><string name="inicio_sesion">Sign in</string>
+    <string name="no_tienes_cuenta">Do you not have an account?</string>
+    <string name="acceder">Access</string>
+    <string name="registro">Register</string>
+    <string name="biografia">Biography</string>
+    <string name="fechanacimiento">Birth date</string>
+    <string name="Nombre">Name</string>
+    <string name="confirmarCon">Confirm Password</string>
+    <string name="registrarse">Sign Up</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.dasmeet;
 
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -60,16 +61,15 @@ public class IdiomaFragment extends Fragment {
 
             switch (i) {
                 case 0:
-                    setAppLocale("es");
+                    saveLanguage("es");
+                    setLanguage("es");
                     break;
                 case 1:
-                    // Navegar al fragmento de idioma
-                    setAppLocale("en");
+                    saveLanguage("en");
+                    setLanguage("en");
                     break;
-
-
                 default:
-                    // Valor de i no válido, realizar una acción alternativa o mostrar un mensaje de error
+                    break;
             }
 
 
@@ -90,5 +90,20 @@ public class IdiomaFragment extends Fragment {
         resources.updateConfiguration(configuration, displayMetrics);
 
         requireActivity().recreate();
+    }
+
+    private void saveLanguage(String language) {
+        SharedPreferences sharedPreferences = getActivity().getPreferences(getActivity().MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // Guardar el idioma seleccionado
+        editor.putString("idioma", language);
+
+        editor.apply();
+    }
+
+    private void setLanguage(String language) {
+        // Configura el idioma en la aplicación
+        ((MainActivity) getActivity()).setLanguage(language);
     }
 }
