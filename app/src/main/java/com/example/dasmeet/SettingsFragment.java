@@ -1,5 +1,6 @@
 package com.example.dasmeet;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 
 import android.widget.ListView;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -46,11 +48,14 @@ public class SettingsFragment extends Fragment {
         texto.add(getResources().getString(R.string.tema));
         texto.add(getResources().getString(R.string.cerrar));
         texto.add(getResources().getString(R.string.eliminar));
-        imgs.add(getResources().getDrawable(R.drawable.perfil));
-        imgs.add(getResources().getDrawable(R.drawable.idioma));
-        imgs.add(getResources().getDrawable(R.drawable.themas));
-        imgs.add(getResources().getDrawable(R.drawable.cerrar));
-        imgs.add(getResources().getDrawable(R.drawable.eliminar));
+        if (getContext() != null) {
+            imgs.add(ContextCompat.getDrawable(getContext(),R.drawable.perfil));
+            imgs.add(ContextCompat.getDrawable(getContext(),R.drawable.idioma));
+            imgs.add(ContextCompat.getDrawable(getContext(),R.drawable.themas));
+            imgs.add(ContextCompat.getDrawable(getContext(),R.drawable.cerrar));
+            imgs.add(ContextCompat.getDrawable(getContext(),R.drawable.eliminar));
+        }
+
 
 
         ListView lista=view.findViewById(R.id.lista);
@@ -72,7 +77,14 @@ public class SettingsFragment extends Fragment {
                     replaceFragment(new TemaFragment());
                     break;
                 case 3:
-                    //ir al inicio
+                    boolean success = getContext().deleteFile("config.txt");
+
+                    if (success) {
+                        Intent intent = new Intent(getContext(), InicioSesion.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
                     break;
                 case 4:
                     FileUtils fileUtils = new FileUtils();
