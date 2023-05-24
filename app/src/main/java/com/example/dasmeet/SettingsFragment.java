@@ -5,19 +5,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import android.widget.ListView;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+
+import com.example.dasmeet.utils.FileUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -79,7 +78,7 @@ public class SettingsFragment extends Fragment {
                     FileUtils fileUtils = new FileUtils();
                     String mail = fileUtils.readFile(getContext(), "config.txt");
 
-                    String url = "http://" + "192.168.1.116" + ":3005/eliminarUsuario";
+                    String url = BD.getIp() + "/eliminarUsuario";
                     JSONObject requestBody = new JSONObject();
                     try {
 

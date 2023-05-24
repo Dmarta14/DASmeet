@@ -18,15 +18,17 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
+import com.example.dasmeet.utils.FileUtils;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Calendar;
 import java.util.regex.Pattern;
+
 public class Registro extends AppCompatActivity {
 
-    EditText usu, contraseña1, contraseña2, fechanacimiento, mail, descripcion;
+    EditText usu, contrasena1, contrasena2, fechanacimiento, mail, descripcion;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -35,57 +37,62 @@ public class Registro extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
         usu = findViewById(R.id.Usuario);
         mail = findViewById(R.id.Mail);
-        contraseña1 = findViewById(R.id.PasswordInicial);
-        contraseña2 = findViewById(R.id.PasswordConfirmada);
+        contrasena1 = findViewById(R.id.PasswordInicial);
+        contrasena2 = findViewById(R.id.PasswordConfirmada);
         fechanacimiento = findViewById(R.id.et_nacimiento);
         descripcion = findViewById(R.id.descripcion);
+
         Button volver = findViewById(R.id.Cancelar);
-        volver.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), inicio_sesion.class);
-                startActivity(intent);
-            }
+        volver.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), InicioSesion.class);
+            startActivity(intent);
         });
 
         Button siguiente = findViewById(R.id.Siguiente);
-        siguiente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String usuario = usu.getText().toString();
-                String contra1 = contraseña1.getText().toString();
-                String contraConfirmada = contraseña2.getText().toString();
-                String fechaNa = fechanacimiento.getText().toString();
-                String correo = mail.getText().toString();
-                String des = descripcion.getText().toString();
+        siguiente.setOnClickListener(v -> {
+            String usuario = usu.getText().toString();
+            String contra1 = contrasena1.getText().toString();
+            String contraConfirmada = contrasena2.getText().toString();
+            String fechaNa = fechanacimiento.getText().toString();
+            String correo = mail.getText().toString();
+            String des = descripcion.getText().toString();
 
-                //validaciones de los campos
-                if (usuario.isEmpty() || contra1.isEmpty() || contraConfirmada.isEmpty() || fechaNa.isEmpty() || correo.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Deben estar todos los campos rellenados", Toast.LENGTH_LONG).show();
+            //validaciones de los campos
+            if (usuario.isEmpty() || contra1.isEmpty() || contraConfirmada.isEmpty()
+                    || fechaNa.isEmpty() || correo.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "Deben estar todos los " +
+                        "campos rellenados", Toast.LENGTH_LONG).show();
+            } else {
+                Pattern pattern = Patterns.EMAIL_ADDRESS;
+                if (!pattern.matcher(correo).matches()) {
+                    Toast.makeText(getApplicationContext(), "Correo Electrónico " +
+                                    "incorrecto. Ingrese un Email Valido",
+                            Toast.LENGTH_LONG).show();
                 } else {
-                    Pattern pattern = Patterns.EMAIL_ADDRESS;
-                    if (pattern.matcher(correo).matches() == false) {
-                        Toast.makeText(getApplicationContext(), "Correo Electrónico incorrecto. Ingrese un Email Valido", Toast.LENGTH_LONG).show();
+                    if (contra1.length() < 8) {
+                        Toast.makeText(getApplicationContext(), "La contraseña debe" +
+                                " tener 8 dígitos como mínimo", Toast.LENGTH_LONG).show();
                     } else {
-                        if (contra1.length() < 8) {
-                            Toast.makeText(getApplicationContext(), "La contraseña debe tener 8 dígitos como mínimo", Toast.LENGTH_LONG).show();
+                        if (!validarpassword(contra1)) {
+                            Toast.makeText(getApplicationContext(), "La contraseña " +
+                                            "debe tener números y letras",
+                                    Toast.LENGTH_LONG).show();
                         } else {
-                            if (validarpassword(contra1) == false) {
-                                Toast.makeText(getApplicationContext(), "La contraseña debe tener números y letras", Toast.LENGTH_LONG).show();
-                            } else {
-                                if (contra1.equals(contraConfirmada)) {
-                                    FileUtils fUtils = new FileUtils();
-                                    existeUsuarioCorreo(usuario, contra1, fechaNa, correo,des);
+                            if (contra1.equals(contraConfirmada)) {
+                                FileUtils fUtils = new FileUtils();
+                                existeUsuarioCorreo(usuario, contra1, fechaNa,
+                                        correo, des);
 
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Contraseñas incorrectas", Toast.LENGTH_LONG).show();
-                                }
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Contrase" +
+                                        "ñas incorrectas", Toast.LENGTH_LONG).show();
                             }
                         }
-
                     }
-                }
 
+                }
             }
+
         });
 
     }
@@ -106,15 +113,14 @@ public class Registro extends AppCompatActivity {
             }
 
         }
-        if (numeros == true && letras == true) {
-            return true;
-        }
-        return false;
+        return numeros && letras;
     }
 
     //Utilizamos un fragment para la eleccion de la fecha de nacimiento
     public void showDatePickerDialog(View v) {
-        DatePickerFragment newFragment = DatePickerFragment.newInstance((datePicker, year, month, day) -> {
+        DatePickerFragment newFragment = DatePickerFragment.newInstance((datePicker,
+                                                                         year, month,
+                                                                         day) -> {
             // +1 ya que Enero es 0
             Calendar selectedDate = Calendar.getInstance();
             selectedDate.set(Calendar.YEAR, year);
@@ -136,10 +142,12 @@ public class Registro extends AppCompatActivity {
             // Comprobar si el usuario es mayor de edad
             if (age >= 18) {
                 // El usuario es mayor de edad, hacer lo que sea necesario
-                final String diaSeleccionado = twoDigits(day) + "/" + twoDigits(month + 1) + "/" + year;
+                final String diaSeleccionado =
+                        twoDigits(day) + "/" + twoDigits(month + 1) + "/" + year;
                 fechanacimiento.setText(diaSeleccionado);
             } else {
-                Toast.makeText(getApplicationContext(), "El usuario debe ser mayor de edad", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "El usuario debe ser mayor de " +
+                        "edad", Toast.LENGTH_LONG).show();
             }
 
 
@@ -152,35 +160,41 @@ public class Registro extends AppCompatActivity {
         return (n <= 9) ? ("0" + n) : String.valueOf(n);
     }
 
-    public void anadirUsuario(String usuario, String password, String fecha, String mail, String token,String descripcion) {
+    public void anadirUsuario(String usuario, String password, String fecha,
+                              String mail, String token, String descripcion) {
         Data param = new Data.Builder()
                 .putString("param", "Registrar")
                 .putString("nombre", usuario)
                 .putString("password", password)
                 .putString("fechana", fecha)
                 .putString("mail", mail)
-                .putString("token",token)
-                .putString("descripcion",descripcion).build();
+                .putString("token", token)
+                .putString("descripcion", descripcion).build();
 
-        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(BD.class).setInputData(param).build();
+        OneTimeWorkRequest oneTimeWorkRequest =
+                new OneTimeWorkRequest.Builder(BD.class).setInputData(param).build();
         WorkManager.getInstance(Registro.this).enqueue(oneTimeWorkRequest);
         WorkManager.getInstance(Registro.this).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId()).observe(Registro.this, new Observer<WorkInfo>() {
             @Override
             public void onChanged(WorkInfo workInfo) {
                 if (workInfo != null && workInfo.getState().isFinished()) {
                     if (workInfo.getState() != WorkInfo.State.SUCCEEDED) {
-                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Error",
+                                Toast.LENGTH_LONG).show();
                     } else {
                         Data d = workInfo.getOutputData();
                         boolean b = d.getBoolean("exito", false);
                         if (b) {
                             saveSession(mail);
-                            Intent intent = new Intent(getApplicationContext(), FormularioDatos.class);
+                            Intent intent = new Intent(getApplicationContext(),
+                                    FormularioDatos.class);
                             startActivity(intent);
-                            Toast.makeText(getApplicationContext(), "Registrado exitosamente", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Registrado " +
+                                    "exitosamente", Toast.LENGTH_LONG).show();
 
                         } else {
-                            Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Error",
+                                    Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -188,25 +202,29 @@ public class Registro extends AppCompatActivity {
         });
     }
 
-    public void existeUsuarioCorreo(String usuario, String password, String fecha, String mail, String descripcion) {
+    public void existeUsuarioCorreo(String usuario, String password, String fecha,
+                                    String mail, String descripcion) {
         Data param = new Data.Builder()
                 .putString("param", "ExisteUsuarioCorreo")
                 .putString("nombre", usuario)
                 .putString("mail", mail).build();
 
-        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(BD.class).setInputData(param).build();
+        OneTimeWorkRequest oneTimeWorkRequest =
+                new OneTimeWorkRequest.Builder(BD.class).setInputData(param).build();
         WorkManager.getInstance(this).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId())
                 .observe(this, workInfo -> {
                     if (workInfo != null && workInfo.getState().isFinished()) {
                         if (workInfo.getState() != WorkInfo.State.SUCCEEDED) {
-                            Toast.makeText(getApplicationContext(), "Jaimitada", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Jaimitada",
+                                    Toast.LENGTH_LONG).show();
 
                         } else {
 
                             Data d = workInfo.getOutputData();
                             boolean b = d.getBoolean("existe", false);
                             if (b) {
-                                Toast.makeText(getApplicationContext(), "existe un usuario", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "existe un " +
+                                        "usuario", Toast.LENGTH_LONG).show();
                             } else {
                                 FirebaseMessaging.getInstance().getToken()
                                         .addOnCompleteListener(task -> {
@@ -216,8 +234,11 @@ public class Registro extends AppCompatActivity {
                                                 return;
                                             }
                                             String token = task.getResult();
-                                            anadirUsuario(usuario, password, fecha, mail, token,descripcion);
-                                            Toast.makeText(getApplicationContext(), "Usuario valido", Toast.LENGTH_LONG).show();
+                                            anadirUsuario(usuario, password, fecha,
+                                                    mail, token, descripcion);
+                                            Toast.makeText(getApplicationContext(),
+                                                    "Usuario valido",
+                                                    Toast.LENGTH_LONG).show();
                                             finish();
                                         });
                             }
@@ -229,6 +250,7 @@ public class Registro extends AppCompatActivity {
 
         WorkManager.getInstance(this).enqueue(oneTimeWorkRequest);
     }
+
     private void saveSession(String mail) {
         try {
             OutputStreamWriter outputStreamWriter =

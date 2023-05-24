@@ -9,6 +9,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -19,25 +30,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
-import android.provider.MediaStore;
-import android.util.Base64;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import com.example.dasmeet.utils.FileUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,11 +48,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-
 public class PerfilFragment extends Fragment {
 
-
-    private TextView etcorreo,etcontra;
+    private TextView etcorreo, etcontra;
     private ActivityResultLauncher<Intent> imageCaptureLauncher;
     private ActivityResultLauncher<String> requestPermissionLauncher;
 
@@ -63,9 +58,10 @@ public class PerfilFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
-        ((MainActivity)getActivity()).changeToolbar(true);
+        ((MainActivity) getActivity()).changeToolbar(true);
         imageCaptureLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(), result -> {
                     if (result.getResultCode() == RESULT_OK) {
@@ -81,13 +77,15 @@ public class PerfilFragment extends Fragment {
                         String imageFileName =
                                 "IMG_" + new SimpleDateFormat("yyyyMMdd_HHmmss")
                                         .format(new Date());
-                        File directory = getContext().getApplicationContext().getFilesDir();
+                        File directory =
+                                getContext().getApplicationContext().getFilesDir();
                         File imageFile = new File(directory, imageFileName);
 
                         FileOutputStream outputStream = null;
                         try {
                             outputStream = new FileOutputStream(imageFile);
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100,
+                                    outputStream);
                             outputStream.close();
                         } catch (FileNotFoundException e) {
                             throw new RuntimeException(e);
@@ -100,12 +98,11 @@ public class PerfilFragment extends Fragment {
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
                         byte[] byteArray = stream.toByteArray();
-                        String photo64 = Base64.encodeToString(byteArray,Base64.DEFAULT);
-
+                        String photo64 = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
 
                         // HTTP request to save the photo to database
-                        String url = "http://" + "192.168.1.116" + ":3005/insertarFoto";
+                        String url = BD.getIp() + "/insertarFoto";
                         JSONObject requestBody = new JSONObject();
                         FileUtils fileUtils = new FileUtils();
                         String mail = fileUtils.readFile(getContext(), "config.txt");
@@ -119,7 +116,8 @@ public class PerfilFragment extends Fragment {
                             throw new RuntimeException(e);
                         }
 
-                        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
+                        JsonObjectRequest request =
+                                new JsonObjectRequest(Request.Method.POST,
                                 url, requestBody, response -> {
                             Log.d("PA", "SUCCESS");
                         }, error -> {
@@ -133,32 +131,27 @@ public class PerfilFragment extends Fragment {
 
         return view;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         ImageButton imageButton = view.findViewById(R.id.imagegustos);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.action_PerfilFragment_to_gustosFragment);
+        imageButton.setOnClickListener(v -> {
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.action_PerfilFragment_to_gustosFragment);
 
-            }
         });
         ImageButton imageButton2 = view.findViewById(R.id.imagedatos);
-        imageButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.action_PerfilFragment_to_datosFragment);
+        imageButton2.setOnClickListener(v -> {
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.action_PerfilFragment_to_datosFragment);
 
-            }
         });
         FileUtils fileUtils = new FileUtils();
         String mail = fileUtils.readFile(getContext(), "config.txt");
 
-        etcorreo=view.findViewById(R.id.textView1);
+        etcorreo = view.findViewById(R.id.textView1);
         etcorreo.setText(mail);
 
         requestPermissionLauncher = registerForActivityResult(
@@ -189,7 +182,7 @@ public class PerfilFragment extends Fragment {
 
     }
 
-    public void recogerFoto(View view){
+    public void recogerFoto(View view) {
 
         imageView = view.findViewById(R.id.imageView);
         // Create the registerForActivityResult to get the data after taking the photo
@@ -198,7 +191,7 @@ public class PerfilFragment extends Fragment {
         FileUtils fileUtils = new FileUtils();
         String mail = fileUtils.readFile(getContext(), "config.txt");
 
-        String url = "http://" + "192.168.1.116" + ":3005/buscarFoto";
+        String url = BD.getIp() + "/buscarFoto";
         JSONObject requestBody = new JSONObject();
 
         try {
@@ -216,7 +209,7 @@ public class PerfilFragment extends Fragment {
                     // The photo exists
                     String image64 = response.getString("Foto");
                     byte[] b = Base64.decode(image64, Base64.DEFAULT);
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(b,0,
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0,
                             b.length);
                     Bitmap rescaledImage = adjustImageSize(bitmap);
                     imageView.setImageBitmap(rescaledImage);
@@ -234,20 +227,19 @@ public class PerfilFragment extends Fragment {
     }
 
 
-
     // Adjust the image size to be bigger than the one taken
     private Bitmap adjustImageSize(Bitmap bitmap) {
         int width = bitmap.getWidth();
         int length = bitmap.getHeight();
 
         int newSize = 800;
-        float scaleWidth = ((float) newSize/width);
-        float scaleLength = ((float) newSize/length);
+        float scaleWidth = ((float) newSize / width);
+        float scaleLength = ((float) newSize / length);
 
         Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth, scaleLength);
 
-        return Bitmap.createBitmap(bitmap, 0,0, width, length, matrix, true);
+        return Bitmap.createBitmap(bitmap, 0, 0, width, length, matrix, true);
     }
 
     // Starts the camera to take a photo

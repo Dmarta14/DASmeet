@@ -1,8 +1,7 @@
 package com.example.dasmeet;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -15,9 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.dasmeet.databinding.ActivityMainBinding;
 import com.example.dasmeet.home.Home;
-
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import com.example.dasmeet.utils.FileUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,24 +26,31 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        FileUtils fu = new FileUtils();
+        if (!fu.sessionExists(this, "config.txt")) {
+            Intent intent = new Intent(this, InicioSesion.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } else {
+            binding = ActivityMainBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
 
-        Toolbar t = findViewById(R.id.toolbar);
-        setSupportActionBar(t);
+            Toolbar t = findViewById(R.id.toolbar);
+            setSupportActionBar(t);
 
-        binding.bottomNavigationView.setOnItemSelectedListener(i -> {
-            if (i.getItemId() == HOME_ID)
-                replaceFragment(new Home());
+            binding.bottomNavigationView.setOnItemSelectedListener(i -> {
+                if (i.getItemId() == HOME_ID)
+                    replaceFragment(new Home());
 
-            else if (i.getItemId() == CHAT_ID)
+                else if (i.getItemId() == CHAT_ID)
+                    return true;
+                else if (i.getItemId() == SETTINGS_ID)
+                    replaceFragment(new SettingsFragment());
                 return true;
-            else if (i.getItemId() == SETTINGS_ID)
-                replaceFragment(new SettingsFragment());
-            return true;
-        });
-        replaceFragment(new Home());
-
+            });
+            replaceFragment(new Home());
+        }
     }
 
     private void replaceFragment(Fragment fragment) {
@@ -56,18 +60,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragment_container, fragment);
 
         fragmentTransaction.commit();
-    }
-
-    public void saveSession(String mail) {
-        try {
-            OutputStreamWriter outputStreamWriter =
-                    new OutputStreamWriter(openFileOutput("config.txt",
-                            Context.MODE_PRIVATE));
-            outputStreamWriter.write(mail);
-            outputStreamWriter.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e);
-        }
     }
 
     public void changeToolbar(boolean b) {

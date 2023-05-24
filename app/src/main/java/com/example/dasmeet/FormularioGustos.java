@@ -15,6 +15,8 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
+import com.example.dasmeet.utils.FileUtils;
+
 public class FormularioGustos extends AppCompatActivity {
 
 
@@ -154,7 +156,7 @@ public class FormularioGustos extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "Regitro completado", Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(v.getContext(),inicio_sesion.class);
+                Intent intent = new Intent(v.getContext(),InicioSesion.class);
                 startActivity(intent);
             }
         });

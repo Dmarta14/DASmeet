@@ -19,10 +19,10 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 public class BD extends Worker{
-    private static final String IP = "161.35.34.173";
+    private static final String ROUTE = "http://192.168.1.150:3005";
 
     public static String getIp() {
-        return IP;
+        return ROUTE;
     }
 
     public BD (@NonNull Context context, @NonNull WorkerParameters workerParams) {
@@ -34,7 +34,7 @@ public class BD extends Worker{
         assert action != null;
         switch (action){
             case "Registrar":{
-                String dir = "http://192.168.1.116:3005/create";
+                String dir = ROUTE + "/create";
 
                 HttpURLConnection urlConnection;
 
@@ -97,7 +97,7 @@ public class BD extends Worker{
 
                 String mail =  getInputData().getString("mail");
 
-                String dir = "http://192.168.1.116:3005/existeUsuarioCorreo?mail=" + mail;
+                String dir = ROUTE + "/existeUsuarioCorreo?mail=" + mail;
 
                 try {
                     URL dest =new URL(dir);
@@ -134,7 +134,7 @@ public class BD extends Worker{
 
                 HttpURLConnection urlConnection;
 
-                String dir = "http://192.168.1.116:3005/introducirDatos";
+                String dir = ROUTE + "/introducirDatos";
 
                 String sexo =  getInputData().getString("sexo");
                 String ojos =  getInputData().getString("ojo");
@@ -186,7 +186,7 @@ public class BD extends Worker{
             case "ModificarPersonalidad":{
                 HttpURLConnection urlConnection;
 
-                String dir = "http://192.168.1.116:3005/ModificarPersonalidad";
+                String dir = ROUTE + "/ModificarPersonalidad";
 
                 boolean gracioso =  getInputData().getBoolean("gracioso",false);
                 int intGracioso = gracioso ? 1 : 0;
@@ -262,7 +262,7 @@ public class BD extends Worker{
 
                 HttpURLConnection urlConnection;
 
-                String dir = "http://192.168.0.22:3005/introducirPersonalidad";
+                String dir = ROUTE + "/introducirPersonalidad";
 
                 boolean gracioso =  getInputData().getBoolean("gracioso",false);
                 int intGracioso = gracioso ? 1 : 0;
@@ -334,7 +334,7 @@ public class BD extends Worker{
             case "ModificarHobbies":{
                HttpURLConnection urlConnection;
 
-                String dir = "http://192.168.1.116:3005/ModificarHobbies";
+                String dir = ROUTE + "/ModificarHobbies";
 
                 boolean leer =  getInputData().getBoolean("leer",false);
                 int intLeer = leer ? 1 : 0;
@@ -398,7 +398,7 @@ public class BD extends Worker{
 
                 HttpURLConnection urlConnection;
 
-                String dir = "http://192.168.0.22:3005/introducirHobbies";
+                String dir = ROUTE + "/introducirHobbies";
 
                 boolean leer =  getInputData().getBoolean("leer",false);
                 int intLeer = leer ? 1 : 0;
@@ -460,7 +460,7 @@ public class BD extends Worker{
 
 
 
-                String dir = "http://192.168.1.116:3005/ModificarGustoSexo";
+                String dir = ROUTE + "/ModificarGustoSexo";
 
                 boolean hombre =  getInputData().getBoolean("hombre",false);
                 int intHombre = hombre ? 1 : 0;
@@ -519,7 +519,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
 
 
-                String dir = "http://192.168.0.22:3005/seleccionarGustoSexo";
+                String dir = ROUTE + "/seleccionarGustoSexo";
 
                 boolean hombre =  getInputData().getBoolean("hombre",false);
                 int intHombre = hombre ? 1 : 0;
@@ -574,7 +574,7 @@ public class BD extends Worker{
             case "ModificarGustoOjo":{
          HttpURLConnection urlConnection;
 
-                String dir = "http://192.168.1.116:3005/ModificarGustoOjo";
+                String dir = ROUTE + "/ModificarGustoOjo";
 ;
                 boolean marron =  getInputData().getBoolean("marron",false);
                 int intMarron = marron ? 1 : 0;
@@ -632,7 +632,7 @@ public class BD extends Worker{
 
                 HttpURLConnection urlConnection;
 
-                String dir = "http://192.168.0.22:3005/seleccionarGustoOjo";
+                String dir = ROUTE + "/seleccionarGustoOjo";
 
                 boolean marron =  getInputData().getBoolean("marron",false);
                 int intMarron = marron ? 1 : 0;
@@ -686,7 +686,7 @@ public class BD extends Worker{
             case "ModificarGustoPelo":{
          HttpURLConnection urlConnection;
 
-                String dir = "http://192.168.1.116:3005/ModificarGustoPelo";
+                String dir = ROUTE + "/ModificarGustoPelo";
 
                 boolean rubio =  getInputData().getBoolean("rubio",false);
                 int intRubio = rubio ? 1 : 0;
@@ -747,7 +747,7 @@ public class BD extends Worker{
 
                 HttpURLConnection urlConnection;
 
-                String dir = "http://192.168.0.22:3005/seleccionarGustoPelo";
+                String dir = ROUTE + "/seleccionarGustoPelo";
 
                 boolean rubio =  getInputData().getBoolean("rubio",false);
                 int intRubio = rubio ? 1 : 0;
@@ -804,7 +804,7 @@ public class BD extends Worker{
             case "ModificarHobbiesGusto":{
          HttpURLConnection urlConnection;
 
-                String dir = "http://192.168.1.116:3005/ModificarHobbiesGusto";
+                String dir = ROUTE + "/ModificarHobbiesGusto";
 
                 boolean leer =  getInputData().getBoolean("leer",false);
                 int intLeer = leer ? 1 : 0;
@@ -864,7 +864,7 @@ public class BD extends Worker{
 
                 HttpURLConnection urlConnection;
 
-                String dir = "http://192.168.0.22:3005/introducirHobbiesGusto";
+                String dir = ROUTE + "/introducirHobbiesGusto";
 
                 boolean leer =  getInputData().getBoolean("leer",false);
                 int intLeer = leer ? 1 : 0;
@@ -924,7 +924,7 @@ public class BD extends Worker{
             case "ModificarPersonalidadGusto":{
                 HttpURLConnection urlConnection;
 
-                String dir = "http://192.168.1.116:3005/ModificarPersonalidadGusto";
+                String dir = ROUTE + "/ModificarPersonalidadGusto";
 
                 boolean gracioso =  getInputData().getBoolean("gracioso",false);
                 int intGracioso = gracioso ? 1 : 0;
@@ -1000,7 +1000,7 @@ public class BD extends Worker{
 
                 HttpURLConnection urlConnection;
 
-                String dir = "http://192.168.0.22:3005/introducirPersonalidadGusto";
+                String dir = ROUTE + "/introducirPersonalidadGusto";
 
                 boolean gracioso =  getInputData().getBoolean("gracioso",false);
                 int intGracioso = gracioso ? 1 : 0;
@@ -1080,7 +1080,7 @@ public class BD extends Worker{
                 String mail =  getInputData().getString("mail");
                 Log.d("Prueba inicio", "" + contra);
                 Log.d("Prueba inicio", "" + mail);
-                String dir = "http://192.168.0.22:3005/existeUsuarioContra?mail=" + mail+ "&password=" + contra;
+                String dir = ROUTE + "/existeUsuarioContra?mail=" + mail+ "&password=" + contra;
                 try {
                     URL dest =new URL(dir);
                     urlConnection = (HttpURLConnection) dest.openConnection();
@@ -1121,7 +1121,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
                 String mail =  getInputData().getString("mail");
                 Log.d("Prueba inicio", "" + mail);
-                String dir = "http://192.168.0.22:3005/eliminarUsuario";
+                String dir = ROUTE + "/eliminarUsuario";
                 try {
                     Uri.Builder builder = new Uri.Builder().appendQueryParameter("mail", mail);
                     String params = builder.build().getEncodedQuery();
@@ -1167,7 +1167,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
                 String mail =  getInputData().getString("mail");
                 Log.d("Prueba inicio", "" + mail);
-                String dir = "http://192.168.0.22:3005/eliminarDatosUsuario?mail=" + mail;
+                String dir = ROUTE + "/eliminarDatosUsuario?mail=" + mail;
                 try {
                     URL dest =new URL(dir);
                     urlConnection = (HttpURLConnection) dest.openConnection();
@@ -1208,7 +1208,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
                 String mail =  getInputData().getString("mail");
                 Log.d("Prueba inicio", "" + mail);
-                String dir = "http://192.168.0.22:3005/eliminarPersonalidadUsuario?mail=" + mail;
+                String dir = ROUTE + "/eliminarPersonalidadUsuario?mail=" + mail;
                 try {
                     URL dest =new URL(dir);
                     urlConnection = (HttpURLConnection) dest.openConnection();
@@ -1249,7 +1249,7 @@ public class BD extends Worker{
                 HttpURLConnection urlConnection;
                 String mail =  getInputData().getString("mail");
                 Log.d("Prueba inicio", "" + mail);
-                String dir = "http://192.168.0.22:3005/eliminarHobbiesUsuario?mail=" + mail;
+                String dir = ROUTE + "/eliminarHobbiesUsuario?mail=" + mail;
                 try {
                     URL dest =new URL(dir);
                     urlConnection = (HttpURLConnection) dest.openConnection();
