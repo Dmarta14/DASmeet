@@ -63,5 +63,10 @@
     <string name="no_tienes_cuenta">Do you not have an account?</string>
     <string name="registarse">Sign up</string>
     <string name="acceder">Access</string>
+    <string name="registro">Register</string>
+    <string name="biografia">Biography</string>
+    <string name="fechanacimiento">Birth date</string>
+    <string name="Nombre">Name</string>
+    <string name="confirmarCon">Confirm Password</string>
 
 </resources>

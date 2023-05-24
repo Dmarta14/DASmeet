@@ -346,7 +346,13 @@
                             android:text="@string/o" />
 
                     </RadioGroup>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="20dp"
+                        app:srcCompat="@drawable/parte2formulario">
 
+                    </ImageView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
