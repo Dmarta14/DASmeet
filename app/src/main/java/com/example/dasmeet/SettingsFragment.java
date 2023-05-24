@@ -2,12 +2,14 @@ package com.example.dasmeet;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -16,6 +18,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -126,15 +133,31 @@ public class SettingsFragment extends Fragment {
                     case 4:
                         FileUtils fileUtils = new FileUtils();
                         String mail = fileUtils.readFile(getContext(), "config.txt");
-
-                        String url = "http://" + "192.168.1.116" + ":3005/eliminarUsuario";
+                        String url = "http://" + "192.168.1.116" + ":3005/eliminarTodoUsuario";
                         JSONObject requestBody = new JSONObject();
                         try {
-
                             requestBody.put("mail", mail);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
+                        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, requestBody,
+                                response -> {
+                                    try {
+                                        if (response.getBoolean("success")) {
+                                            Log.d("titoss","aaa");
+
+
+                                        }
+                                    } catch (JSONException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                },
+                                error -> {
+                                    Log.e("PA", "ERROR", error);
+                                });
+
+                        RequestQueue queue = Volley.newRequestQueue(getContext());
+                        queue.add(request);
                         break;
 
 
@@ -148,5 +171,8 @@ public class SettingsFragment extends Fragment {
 
 
     }
+
+
+
 
 }
