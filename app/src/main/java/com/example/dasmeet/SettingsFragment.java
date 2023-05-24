@@ -140,7 +140,7 @@ public class SettingsFragment extends Fragment {
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
-                        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, requestBody,
+                        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, url, requestBody,
                                 response -> {
                                     try {
                                         if (response.getBoolean("success")) {
