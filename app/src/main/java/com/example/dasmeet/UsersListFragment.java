@@ -50,6 +50,9 @@ public class UsersListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_users_list, container, false);
 
+        FileUtils fu = new FileUtils();
+        usermail = fu.readFile(getContext(), "config.txt");
+
         ListView lista = view.findViewById(R.id.users_list);
 
         FileUtils fileUtils = new FileUtils();
@@ -77,14 +80,22 @@ public class UsersListFragment extends Fragment {
                         if (mail1.equals(mail)){//el pimer mail es el del usuario
                             noms.add(a.getJSONObject(i).getString("Nombre2"));
                             mails.add(mail2);
-                            imgs.add(a.getJSONObject(i).getString("Foto2"));
+                            if (!a.getJSONObject(i).getString("Foto2").equals("null")){
+                                imgs.add(a.getJSONObject(i).getString("Foto2"));
+                            }else{
+                                imgs.add("default");
+                            }
                         }else{
                             noms.add(a.getJSONObject(i).getString("Nombre1"));
                             mails.add(mail1);
-                            imgs.add(a.getJSONObject(i).getString("Foto1"));
+                            if (!a.getJSONObject(i).getString("Foto1").equals("null")){
+                                imgs.add(a.getJSONObject(i).getString("Foto1"));
+                            }else{
+                                imgs.add("default");
+                            }
                         }
                     }
-                    UserListAdapter eladap = new UserListAdapter(requireContext(), noms, imgs);
+                    UserListAdapter eladap = new UserListAdapter(((MainActivity)getActivity()), noms, imgs);
                     lista.setAdapter(eladap);
 
                 }
@@ -98,12 +109,7 @@ public class UsersListFragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(requireContext());
         queue.add(request);
 
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                obtenerClave(mails.get(i),i);
-            }
-        });
+        lista.setOnItemClickListener((adapterView, view1, i, l) -> obtenerClave(mails.get(i),i));
 
         return view;
     }
@@ -145,15 +151,4 @@ public class UsersListFragment extends Fragment {
         });
     }
 
-    public void saveSession(String mail) {
-        try {
-            OutputStreamWriter outputStreamWriter =
-                    new OutputStreamWriter(requireContext().openFileOutput("config.txt",
-                            Context.MODE_PRIVATE));
-            outputStreamWriter.write(mail);
-            outputStreamWriter.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e);
-        }
-    }
 }

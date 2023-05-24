@@ -6,30 +6,21 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class OtherProfile extends AppCompatActivity {
     private TextView timer;
-    private String getNombre,getFotoPerfil,user1mail,usermail,chatKey;
+    private String getNombre, getFotoPerfil, user1mail, usermail, chatKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,34 +35,25 @@ public class OtherProfile extends AppCompatActivity {
 
         getNombre = getIntent().getStringExtra("nombreUser");
         String getFotoPer = getIntent().getStringExtra("fotoPer");
-        TextView nombreUser=findViewById(R.id.nombre);
-        ImageView fotoPerfil=findViewById(R.id.fotoPerfil);
-        timer=findViewById(R.id.timer);
-        ImageView atras=findViewById(R.id.atras_btn2);
+        TextView nombreUser = findViewById(R.id.nombre);
+        ImageView fotoPerfil = findViewById(R.id.fotoPerfil);
+        ImageView atras = findViewById(R.id.atras_btn2);
+        if (!getFotoPer.equals("default")) {
+            String image64 = getFotoPer;
+            byte[] b = Base64.decode(image64, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0,
+                    b.length);
+            Bitmap rescaledImage = adjustImageSize(bitmap);
+            fotoPerfil.setImageBitmap(rescaledImage);
+        }
 
-        String image64 = getFotoPer;
-        byte[] b = Base64.decode(image64, Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(b,0,
-                b.length);
-        Bitmap rescaledImage = adjustImageSize(bitmap);
-        fotoPerfil.setImageBitmap(rescaledImage);
-
-        atras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OtherProfile.this, Chat.class);
-                intent.putExtra("nombre",getNombre);
-                intent.putExtra("mail1",user1mail);
-                intent.putExtra("mailUser",usermail);
-                intent.putExtra("chatKey", chatKey);
-                intent.putExtra("fotoPer",getFotoPer);
-                startActivity(intent);
-            }
+        atras.setOnClickListener(v -> {
+            finish();
         });
 
         nombreUser.setText(getNombre);
-        //Picasso.get().load(getFotoPer).into(fotoPerfil);
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -101,12 +83,12 @@ public class OtherProfile extends AppCompatActivity {
         int length = bitmap.getHeight();
 
         int newSize = 800;
-        float scaleWidth = ((float) newSize/width);
-        float scaleLength = ((float) newSize/length);
+        float scaleWidth = ((float) newSize / width);
+        float scaleLength = ((float) newSize / length);
 
         Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth, scaleLength);
 
-        return Bitmap.createBitmap(bitmap, 0,0, width, length, matrix, true);
+        return Bitmap.createBitmap(bitmap, 0, 0, width, length, matrix, true);
     }
 }

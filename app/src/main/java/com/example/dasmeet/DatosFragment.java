@@ -3,6 +3,8 @@ package com.example.dasmeet;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -38,8 +40,7 @@ public class DatosFragment extends Fragment {
         imagenAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_datosFragment_to_PerfilFragment);
+
             }
         });
 
@@ -152,8 +153,7 @@ public class DatosFragment extends Fragment {
                 }
 
                 anadirHobbies(bleer,bdeporte,bfiesta,bcine,botro,mail);
-                NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_datosFragment_to_PerfilFragment);
+                replaceFragment(new PerfilFragment());
             }
         });
         return view;
@@ -229,6 +229,15 @@ public class DatosFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+
+        fragmentTransaction.commit();
     }
 }
 

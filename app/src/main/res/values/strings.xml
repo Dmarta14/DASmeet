@@ -8,21 +8,21 @@
     <string name="perfil">Cuenta</string>
     <string name="notificaciones">Notificaciones</string>
     <string name="idioma">Idioma</string>
-    <string name="tema">Visualizaci�n</string>
+    <string name="tema">Visualización</string>
     <string name="cerrar">Salir</string>
     <string name="eliminar">Borrar cuenta </string>
     <string name="aspecto">Aspecto</string>
     <string name="claro">Claro</string>
     <string name="oscuro">Oscuro</string>
     <string name="esp">Castellano</string>
-    <string name="ing">Ingl�s</string>
+    <string name="ing">Inglés</string>
     <string name="guardar">Guardar</string>
     <string name="Gustos">Cambia tus gustos</string>
     <string name="datos">Cambia tus datos</string>
     <string name="contra">Contraseña</string>
     <string name="usuario">Correo</string>
-    <string name="camara">C�mara</string>
-    <string name="galeria">Galer�a</string>
+    <string name="camara">Cámara</string>
+    <string name="galeria">Galería</string>
     <string name="formulario1">Gustos que tiene que tener la otra persona   Puedes marcar varias opciones en cada pregunta</string>
     <string name="p1g">Pregunta nª1:¿Cúal es el sexo que te atrae?  </string>
     <string name="h">Hombre</string>
@@ -34,7 +34,7 @@
     <string name="verdes">Verdes</string>
     <string name="p3g">Pregunta nª3:¿Cuál es el color de pelo que te atrae?</string>
     <string name="rubio">Rubio</string>
-    <string name="castano">Casta�o</string>
+    <string name="castano">Castaño</string>
     <string name="moreno">Moreno</string>
     <string name="op">Otro(Pelirrojo,azul,Verde,Rosa...)</string>
     <string name="p4g">Pregunta nª4:¿Cómo te gusta que sea una persona?</string>
@@ -51,7 +51,7 @@
     <string name="deporte">Hacer Deporte</string>
     <string name="fiesta">Salir de fiesta</string>
     <string name="cine">Ir al cine</string>
-    <string name="carino">Cari�oso/a</string>
+    <string name="carino">Cariñoso/a</string>
     <string name="atras">Atrás</string>
     <string name="descripcion">Description</string>
     <string name="formulario2">Datos personales</string>
@@ -73,5 +73,6 @@
     <string name="fechanacimiento">Fecha Nacimiento</string>
     <string name="Nombre">Nombre</string>
     <string name="confirmarCon">Confirmar Contraseña</string>
+    <string name="profile_info">Información del perfil</string>
 
 </resources>

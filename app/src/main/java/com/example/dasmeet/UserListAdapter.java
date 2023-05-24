@@ -47,12 +47,14 @@ public class UserListAdapter extends BaseAdapter {
         TextView nombre= (TextView) view.findViewById(R.id.nombre);
         ImageView imagen=(ImageView) view.findViewById(R.id.imagen);
         nombre.setText(nombres.get(i));
-        String image64 = imagenes.get(i);
-        byte[] b = Base64.decode(image64, Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(b,0,
-                b.length);
-        Bitmap rescaledImage = adjustImageSize(bitmap);
-        imagen.setImageBitmap(rescaledImage);
+        if (!imagenes.get(i).equals("default")) {
+            String image64 = imagenes.get(i);
+            byte[] b = Base64.decode(image64, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(b,0,
+                    b.length);
+            Bitmap rescaledImage = adjustImageSize(bitmap);
+            imagen.setImageBitmap(rescaledImage);
+        }
         return view;
     }
     private Bitmap adjustImageSize(Bitmap bitmap) {

@@ -70,4 +70,5 @@
     <string name="Nombre">Name</string>
     <string name="confirmarCon">Confirm Password</string>
     <string name="registrarse">Sign Up</string>
+    <string name="profile_info">Profile Information</string>
 </resources>

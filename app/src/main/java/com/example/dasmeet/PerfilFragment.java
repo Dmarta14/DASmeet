@@ -30,6 +30,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -162,14 +164,11 @@ public class PerfilFragment extends Fragment {
 
         ImageButton imageButton = view.findViewById(R.id.imagegustos);
         imageButton.setOnClickListener(v -> {
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_PerfilFragment_to_gustosFragment);
-
+            replaceFragment(new GustosFragment());
         });
         ImageButton imageButton2 = view.findViewById(R.id.imagedatos);
         imageButton2.setOnClickListener(v -> {
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_PerfilFragment_to_datosFragment);
+            replaceFragment(new DatosFragment());
 
         });
         FileUtils fileUtils = new FileUtils();
@@ -344,6 +343,13 @@ public class PerfilFragment extends Fragment {
         queue.add(request);
     }
 
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+
+        fragmentTransaction.commit();
+    }
 
 }

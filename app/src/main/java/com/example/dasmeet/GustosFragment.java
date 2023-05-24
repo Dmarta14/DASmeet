@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -37,12 +39,8 @@ public class GustosFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_gustos, container, false);
 
         ImageView imagenAtras = view.findViewById(R.id.Cancelar);
-        imagenAtras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_gustosFragment_to_PerfilFragment);
-            }
+        imagenAtras.setOnClickListener(v -> {
+            replaceFragment(new PerfilFragment());
         });
         hombre = view.findViewById(R.id.opcion1);
         mujer = view.findViewById(R.id.opcion2);
@@ -165,8 +163,7 @@ public class GustosFragment extends Fragment {
 
                 Toast.makeText(getContext(), "Regitro completado", Toast.LENGTH_LONG).show();
 
-                NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_gustosFragment_to_PerfilFragment);
+                replaceFragment(new PerfilFragment());
             }
         });
 
@@ -294,5 +291,14 @@ public class GustosFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+
+        fragmentTransaction.commit();
     }
 }

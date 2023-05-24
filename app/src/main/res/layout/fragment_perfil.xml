@@ -133,7 +133,8 @@
                 android:layout_width="75dp"
                 android:layout_height="40dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/flecha" />
+                android:src="@drawable/flecha"
+                android:backgroundTint="#D200BCD4"/>
 
 
         </LinearLayout>
