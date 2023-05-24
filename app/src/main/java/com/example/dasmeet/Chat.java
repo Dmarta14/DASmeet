@@ -50,8 +50,6 @@ public class Chat extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        //prueba
-        //databaseReference.child("chat").child("1").child("user1").setValue(user1mail);
 
         final ImageView atras=findViewById(R.id.atras_btn);
         final TextView nombre=findViewById(R.id.nombre);
