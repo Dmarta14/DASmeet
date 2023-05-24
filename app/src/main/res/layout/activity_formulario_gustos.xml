@@ -12,10 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        >
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -23,10 +20,7 @@
             android:layout_height="match_parent"
             android:background="#F2D7D5"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,7 +58,7 @@
                             android:id="@+id/imageView"
                             android:layout_width="match_parent"
                             android:layout_height="135dp"
-                            app:srcCompat="@drawable/dasmeetlogo" />
+                            android:src="@drawable/dasmeetlogo" />
 
                     </LinearLayout>
 
@@ -94,7 +88,7 @@
                         android:id="@+id/textView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Formulario de los gustos que tiene que tener la otra persona"
+                        android:text="@string/formulario1"
                         android:textAlignment="center"
                         android:textSize="24sp"
                         android:textStyle="bold"
@@ -108,7 +102,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=" Pregunta nº 1: ¿Cúal es el sexo que te atrae?                           (Puedes marcar varias opciones)"
+                        android:text="@string/p1g"
                         android:textStyle="bold"
                         android:textColor="#000000"/>
 
@@ -125,19 +119,19 @@
                             android:id="@+id/opcion1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Hombre" />
+                            android:text="@string/h" />
 
                         <CheckBox
                             android:id="@+id/opcion2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Mujer" />
+                            android:text="@string/m" />
 
                         <CheckBox
                             android:id="@+id/opcion3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Otro" />
+                            android:text="@string/o" />
 
                     </RadioGroup>
 
@@ -148,7 +142,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=" Pregunta nº 2: ¿Cuál es el color de ojos que te gusta? (Puedes marcar varias opciones)"
+                        android:text="@string/p2g"
                         android:textStyle="bold"
                         android:textColor="#000000"/>
 
@@ -165,19 +159,19 @@
                             android:id="@+id/opcion4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Marrones" />
+                            android:text="@string/marrones" />
 
                         <CheckBox
                             android:id="@+id/opcion5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Azules" />
+                            android:text="@string/azules" />
 
                         <CheckBox
                             android:id="@+id/opcion6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Verdes" />
+                            android:text="@string/verdes" />
 
                     </RadioGroup>
 
@@ -188,7 +182,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=" Pregunta nº 3: ¿Cuál es el color de pelo que te atrae? (Puedes marcar varias opciones)"
+                        android:text="@string/p3g"
                         android:textStyle="bold"
                         android:textColor="#000000"/>
 
@@ -205,25 +199,25 @@
                             android:id="@+id/opcion7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Rubio" />
+                            android:text="@string/rubio" />
 
                         <CheckBox
                             android:id="@+id/opcion8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Castaño" />
+                            android:text="@string/castano" />
 
                         <CheckBox
                             android:id="@+id/opcion9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Moreno" />
+                            android:text="@string/moreno" />
 
                         <CheckBox
                             android:id="@+id/opcion10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Otro (Pelirrojo, Azul, Verde, Rosa....)" />
+                            android:text="@string/op" />
 
                     </RadioGroup>
 
@@ -234,7 +228,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=" Pregunta nº 4: ¿Cómo te gusta que sea una persona? (Puedes marcar varias opciones)"
+                        android:text="@string/p4g"
                         android:textStyle="bold"
                         android:textColor="#000000"/>
 
@@ -251,62 +245,61 @@
                             android:id="@+id/opcion11"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Gracioso/a" />
+                            android:text="@string/gracioso" />
 
                         <CheckBox
                             android:id="@+id/opcion12"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Alegre" />
+                            android:text="@string/alegre" />
 
                         <CheckBox
                             android:id="@+id/opcion13"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Simpatico/a" />
+                            android:text="@string/simpatic" />
 
                         <CheckBox
                             android:id="@+id/opcion14"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Borde" />
+                            android:text="@string/borde" />
 
                         <CheckBox
                             android:id="@+id/opcion15"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Cabezon/a" />
+                            android:text="@string/cabezon" />
 
                         <CheckBox
                             android:id="@+id/opcion16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Humilde" />
+                            android:text="@string/humilde" />
 
                         <CheckBox
                             android:id="@+id/opcion17"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Fiel" />
+                            android:text="@string/fiel" />
 
                         <CheckBox
                             android:id="@+id/opcion18"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Impuntual" />
+                            android:text="@string/impuntual" />
                         <CheckBox
                             android:id="@+id/opcion19"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Cariñoso" />
-
+                            android:text="@string/carino" />
 
                     </RadioGroup>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=" Pregunta nº 5: ¿Qué hobbies te gustaría que la otra persona practique? (Marque todos cuales quiera)"
+                        android:text="@string/p5g"
                         android:textStyle="bold"
                         android:textColor="#000000"/>
 
@@ -323,82 +316,64 @@
                             android:id="@+id/opcion20"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Leer" />
+                            android:text="@string/leer" />
 
                         <CheckBox
                             android:id="@+id/opcion21"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Hacer deporte" />
+                            android:text="@string/deporte" />
 
                         <CheckBox
                             android:id="@+id/opcion22"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Salir de fiesta" />
+                            android:text="@string/fiesta" />
 
                         <CheckBox
                             android:id="@+id/opcion23"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Ir al cine" />
+                            android:text="@string/cine" />
 
 
                         <CheckBox
                             android:id="@+id/opcion24"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Otro" />
+                            android:text="@string/o" />
 
                     </RadioGroup>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="14dp" />
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="20dp"
-                        app:srcCompat="@drawable/parte3formulario">
-
-                    </ImageView>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:orientation="horizontal">
-
-                        <Button
+                        <ImageView
                             android:id="@+id/Cancelar"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="155dp"
-                            android:layout_height="50dp"
-                            android:backgroundTint="#1DF7F7F6"
-                            android:onClick="cerrarPantalla"
-                            android:text="Volver"
-                            android:textColor="#03A9F4"
-                            android:textSize="20sp"
-                            app:cornerRadius="100dp"
-                            app:iconPadding="2dp"
-                            app:strokeColor="#03A9F4"
-                            android:layout_marginTop="8dp"/>
-                        <TextView
-                            android:id="@+id/textView126"
-                            android:layout_width="25dp"
-                            android:layout_height="14dp" />
-                        <Button
-                            android:id="@+id/Siguiente"
                             android:layout_width="160dp"
                             android:layout_height="50dp"
                             android:layout_marginLeft="2dp"
-                            android:backgroundTint="#D200BCD4"
-                            android:onClick="registrarUsuario"
                             android:layout_marginTop="8dp"
-                            android:text="SIGUIENTE"
-                            android:textColor="#FFFFFF"
-                            android:textSize="20sp"
-                            android:textStyle="italic"
-                            app:cornerRadius="20dp"
-                            app:iconPadding="2dp" />
+
+                            android:src="@drawable/baseline_arrow_back_24"
+
+                            />
+
+
+                        <TextView
+
+                            android:layout_width="20dp"
+                            android:layout_height="14dp" />
+
+                        <ImageView
+                            android:id="@+id/Guardar"
+                            android:layout_width="155dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="8dp"
+
+                            android:src="@drawable/baseline_save_24"
+                            />
 
                     </LinearLayout>
 
@@ -411,6 +386,7 @@
         </LinearLayout>
 
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

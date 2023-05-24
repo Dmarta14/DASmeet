@@ -19,7 +19,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 public class BD extends Worker{
-    private static final String ROUTE = "http://192.168.1.150:3005";
+    private static final String ROUTE = "http://192.168.0.22:3005";
 
     public static String getIp() {
         return ROUTE;
