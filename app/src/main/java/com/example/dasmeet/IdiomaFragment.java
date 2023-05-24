@@ -1,5 +1,6 @@
 package com.example.dasmeet;
 
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -24,53 +25,9 @@ import android.util.DisplayMetrics;
 import java.util.Locale;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link IdiomaFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class IdiomaFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public IdiomaFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment IdiomaFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static IdiomaFragment newInstance(String param1, String param2) {
-        IdiomaFragment fragment = new IdiomaFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
+    private static final String DEFAULT_LANGUAGE = "default";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -104,13 +61,15 @@ public class IdiomaFragment extends Fragment {
                 NavController navController = Navigation.findNavController(view);
                 switch (i) {
                     case 0:
-                        setAppLocale("es");
+                        saveLanguage("es");
+                        setLanguage("es");
                         // Navegar al fragmento de ajustes
                         navController.navigate(R.id.action_IdiomaFragment_to_SettingsFragment);
                         break;
                     case 1:
                         // Navegar al fragmento de idioma
-                        setAppLocale("en");
+                        saveLanguage("en");
+                        setLanguage("en");
                         navController.navigate(R.id.action_IdiomaFragment_to_SettingsFragment);
                         break;
 
@@ -125,18 +84,22 @@ public class IdiomaFragment extends Fragment {
 
 
     }
-    private void setAppLocale(String languageCode) {
-        Locale locale = new Locale(languageCode);
-        Locale.setDefault(locale);
+    private void saveLanguage(String language) {
+        // Obtén una instancia de SharedPreferences
+        SharedPreferences sharedPreferences = getActivity().getPreferences(getActivity().MODE_PRIVATE);
 
-        Resources resources = getResources();
-        Configuration configuration = resources.getConfiguration();
-        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        // Obtén un editor de SharedPreferences
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        configuration.setLocale(locale);
+        // Guarda el idioma seleccionado
+        editor.putString("idioma", language);
 
-        resources.updateConfiguration(configuration, displayMetrics);
+        // Aplica los cambios
+        editor.apply();
+    }
 
-        requireActivity().recreate(); // Reinicia la actividad para que se aplique el nuevo idioma
+    private void setLanguage(String language) {
+        // Configura el idioma en la aplicación
+        ((MainActivity) getActivity()).setLanguage(language);
     }
 }
